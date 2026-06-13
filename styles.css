@@ -1637,8 +1637,10 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
   }
 
-  .hero-phone img {
-    width: 360px;
+  .hero-carousel {
+    width: 320px;
+    height: 640px;
+    margin: 0 auto;
   }
 
   .floating-card {
@@ -1731,16 +1733,40 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: calc(var(--header-height) + var(--space-2xl));
   }
 
-  .hero-phone img {
-    width: 280px;
+  .hero-carousel {
+    width: 260px;
+    height: 520px;
+    margin: 0 auto;
   }
 
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-
+  /* Horizontal Scroll for Mobile Grids */
+  .features-grid,
+  .audience-grid,
+  .impact-grid,
+  .plans-grid,
+  .testimonials-grid,
   .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 20px; /* Space for scrollbar */
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px; /* Bleed out of container */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .features-grid > *,
+  .audience-grid > *,
+  .impact-grid > *,
+  .plans-grid > *,
+  .testimonials-grid > *,
+  .team-grid > * {
+    flex: 0 0 85%;
+    max-width: 85%;
+    scroll-snap-align: center;
   }
 
   .footer-grid {
@@ -1767,10 +1793,6 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     gap: var(--space-md);
     align-items: center;
-  }
-
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .section-title {
