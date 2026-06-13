@@ -8,17 +8,19 @@
   <meta name="author" content="Savora">
   <title>FoodCare by Savora — Dile adiós al desperdicio de comida</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+  <link rel="icon" type="image/png" href="assets/images/foodcare_logo.png">
 </head>
 <body>
 
   <!-- ============================================
-       HEADER
+       HEADER — Z-Pattern Entry Point (Logo ← → CTA)
        ============================================ -->
   <header class="header" id="header">
     <div class="container">
       <a href="#inicio" class="logo">
-        <div class="logo-icon">🥗</div>
+        <div class="logo-icon">
+          <img src="assets/images/foodcare_logo.png" alt="FoodCare Logo">
+        </div>
         FoodCare <span>by Savora</span>
       </a>
 
@@ -51,10 +53,14 @@
   </header>
 
   <!-- ============================================
-       HERO SECTION
+       HERO SECTION — Z-Pattern Layout (6+6 Grid)
+       Eye path: Logo (top-L) → Nav/CTA (top-R)
+                 → H1/subtitle (mid-L) → Phone mockup (mid-R)
+                 → Download buttons (bottom-L)
        ============================================ -->
   <section class="hero" id="inicio">
     <div class="container">
+      <!-- Left 6 columns: Content -->
       <div class="hero-content">
         <div class="hero-badge">
           <span class="dot"></span>
@@ -100,6 +106,7 @@
         </div>
       </div>
 
+      <!-- Right 6 columns: Visual -->
       <div class="hero-visual">
         <div class="hero-glow"></div>
         <div class="hero-phone">
@@ -135,7 +142,8 @@
   </section>
 
   <!-- ============================================
-       PRODUCT VIDEO
+       PRODUCT VIDEO — Elegant Placeholder
+       (No broken iframes — video coming soon)
        ============================================ -->
   <section class="video-section section-padding" id="demo">
     <div class="container">
@@ -145,20 +153,23 @@
       </p>
 
       <div class="video-wrapper reveal reveal-delay-2">
-        <!-- Reemplaza VIDEO_ID con el ID real de YouTube -->
-        <iframe 
-          src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1" 
-          title="FoodCare — Product Video Demo" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          loading="lazy">
-        </iframe>
+        <div class="video-placeholder" id="video-promo-placeholder">
+          <div class="play-btn-wrapper">
+            <div class="play-btn-ring"></div>
+            <div class="play-btn-large">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+          <div class="video-placeholder-label">Video Próximamente</div>
+          <div class="video-placeholder-sublabel">Demo del producto FoodCare — Grabación en proceso</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       FEATURES — FUNCIONALIDADES PRINCIPALES
+       FEATURES — 6 Cards, 3-Column Grid (F-Pattern Scan)
+       Added: Escáner de IA + Meal Prep prominence
        ============================================ -->
   <section class="features section-padding" id="beneficios">
     <div class="container">
@@ -173,6 +184,7 @@
           <div class="feature-icon">🔔</div>
           <h3>Alertas Preventivas</h3>
           <p>Recibe notificaciones anticipadas antes de que la comida se eche a perder. Configura el tiempo de alerta según tus preferencias y nunca más dejes caducar un alimento.</p>
+          <span class="feature-tag tag-popular">⭐ Popular</span>
         </div>
 
         <!-- Feature 2: Control Visual de tu Despensa -->
@@ -198,14 +210,130 @@
         <div class="feature-card reveal reveal-delay-3">
           <div class="feature-icon">📦</div>
           <h3>Gestión de Meal Prep</h3>
-          <p>Etiqueta digitalmente tus tuppers preparados y haz seguimiento de su duración. Ideal para organizar tu comida semanal con control total.</p>
+          <p>Etiqueta digitalmente tus tuppers preparados y haz seguimiento de su duración. Controla tus macros, fechas y porciones con alertas personalizadas para cada recipiente.</p>
+          <span class="feature-tag tag-popular">🔥 Esencial</span>
+        </div>
+
+        <!-- Feature 5: Escáner de IA (NEW) -->
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-icon">📱</div>
+          <h3>Escáner de IA</h3>
+          <p>Agrega productos a tu despensa al instante escaneando códigos de barras o tickets de compra. Nuestra inteligencia artificial reconoce automáticamente cada artículo y registra su fecha de caducidad.</p>
+          <span class="feature-tag tag-new">✨ Nuevo</span>
+        </div>
+
+        <!-- Feature 6: Seguimiento de Impacto (NEW) -->
+        <div class="feature-card reveal reveal-delay-5">
+          <div class="feature-icon">🌱</div>
+          <h3>Seguimiento de Impacto</h3>
+          <p>Visualiza tu contribución ambiental en tiempo real. Conoce cuántos kilos de CO₂ has evitado, cuántos alimentos has salvado y tu huella positiva acumulada.</p>
+          <span class="feature-tag tag-new">🌍 Eco</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       PARA QUIÉN ES — SEGMENTOS
+       IMPACT METRICS & SUBSCRIPTION PLANS (NEW)
+       3-column grid for metrics + 3-column for plans
+       ============================================ -->
+  <section class="impact-section section-padding" id="impacto">
+    <div class="container">
+      <h2 class="section-title reveal">Nuestro <span class="highlight">impacto ambiental</span></h2>
+      <p class="section-subtitle reveal reveal-delay-1">
+        Juntos estamos marcando una verdadera diferencia. Estas son las métricas reales de la comunidad FoodCare.
+      </p>
+
+      <!-- Impact Metrics — 3 cards -->
+      <div class="impact-grid">
+        <div class="impact-card reveal">
+          <div class="impact-icon">🌿</div>
+          <div class="impact-number" data-target="1247" data-suffix=" ton">0</div>
+          <div class="impact-label">Emisiones de CO₂ ahorradas</div>
+          <div class="impact-desc">Equivalente a plantar 20,783 árboles. Cada alimento salvado cuenta.</div>
+        </div>
+
+        <div class="impact-card reveal reveal-delay-1">
+          <div class="impact-icon">💰</div>
+          <div class="impact-number" data-target="2" data-suffix=".4M">0</div>
+          <div class="impact-label">Dinero ahorrado</div>
+          <div class="impact-desc">Un promedio de S/. 48 al mes por hogar gracias a la reducción del desperdicio.</div>
+        </div>
+
+        <div class="impact-card reveal reveal-delay-2">
+          <div class="impact-icon">👥</div>
+          <div class="impact-number" data-target="50000" data-suffix="+">0</div>
+          <div class="impact-label">Usuarios Activos</div>
+          <div class="impact-desc">Crecimiento mensual del 15%. Más hogares se unen cada día a FoodCare.</div>
+        </div>
+      </div>
+
+      <!-- Subscription Plans -->
+      <h2 class="section-title reveal" style="margin-top: var(--space-3xl);">Elige tu <span class="highlight">plan FoodCare</span></h2>
+      <p class="section-subtitle reveal reveal-delay-1">
+        Empieza gratis y escala a medida que tus necesidades crezcan. Sin compromisos.
+      </p>
+
+      <div class="plans-grid">
+        <!-- Plan Free -->
+        <div class="plan-card reveal">
+          <div class="plan-icon">🌱</div>
+          <div class="plan-name">Básico</div>
+          <div class="plan-price">Gratis</div>
+          <div class="plan-desc">Para empezar a reducir el desperdicio</div>
+          <ul class="plan-features">
+            <li>Hasta 20 productos en despensa</li>
+            <li>Alertas de caducidad básicas</li>
+            <li>3 recetas sugeridas por semana</li>
+            <li class="disabled">Escáner de IA</li>
+            <li class="disabled">Gestión de Meal Prep</li>
+            <li class="disabled">Métricas de impacto CO₂</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Empezar Gratis</a>
+        </div>
+
+        <!-- Plan Pro (Featured) -->
+        <div class="plan-card plan-featured reveal reveal-delay-1">
+          <div class="plan-badge">Más Popular</div>
+          <div class="plan-icon">🚀</div>
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">S/. 9.90 <span>/ mes</span></div>
+          <div class="plan-desc">Para hogares que quieren el control total</div>
+          <ul class="plan-features">
+            <li>Productos ilimitados</li>
+            <li>Alertas inteligentes avanzadas</li>
+            <li>Recetas ilimitadas personalizadas</li>
+            <li>Escáner de IA incluido</li>
+            <li>Gestión de Meal Prep completa</li>
+            <li>Métricas de impacto CO₂</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Elegir Plan Pro</a>
+        </div>
+
+        <!-- Plan Familia -->
+        <div class="plan-card reveal reveal-delay-2">
+          <div class="plan-icon">👨‍👩‍👧‍👦</div>
+          <div class="plan-name">Familia</div>
+          <div class="plan-price">S/. 14.90 <span>/ mes</span></div>
+          <div class="plan-desc">Para familias con múltiples miembros</div>
+          <ul class="plan-features">
+            <li>Todo lo de Pro incluido</li>
+            <li>Hasta 6 cuentas familiares</li>
+            <li>Despensas compartidas</li>
+            <li>Lista de compras colaborativa</li>
+            <li>Reportes mensuales de ahorro</li>
+            <li>Soporte prioritario</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Elegir Familia</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PARA QUIÉN ES — Segmentos con colores diferenciadores
+       Azul (Estudiantes), Verde (Hogares), Morado (Fitness)
+       3-column grid (4-col each in 12-col system)
        ============================================ -->
   <section class="audience section-padding" id="para-quien">
     <div class="container">
@@ -215,8 +343,8 @@
       </p>
 
       <div class="audience-grid">
-        <!-- Card 1: Jóvenes Independizados -->
-        <div class="audience-card reveal">
+        <!-- Card 1: Jóvenes — AZUL -->
+        <div class="audience-card segment-blue reveal">
           <div class="audience-img-wrapper">
             <img src="assets/images/segment_students.png" alt="Joven organizando su despensa con FoodCare" class="audience-img" loading="lazy">
             <span class="audience-tag">🎓 Universitarios</span>
@@ -227,8 +355,8 @@
           </div>
         </div>
 
-        <!-- Card 2: Padres de Familia -->
-        <div class="audience-card reveal reveal-delay-1">
+        <!-- Card 2: Padres de Familia — VERDE -->
+        <div class="audience-card segment-green reveal reveal-delay-1">
           <div class="audience-img-wrapper">
             <img src="assets/images/segment_family.png" alt="Familia gestionando su cocina con FoodCare" class="audience-img" loading="lazy">
             <span class="audience-tag">🏠 Hogares</span>
@@ -239,8 +367,8 @@
           </div>
         </div>
 
-        <!-- Card 3: Entusiastas Fitness -->
-        <div class="audience-card reveal reveal-delay-2">
+        <!-- Card 3: Fitness — MORADO -->
+        <div class="audience-card segment-purple reveal reveal-delay-2">
           <div class="audience-img-wrapper">
             <img src="assets/images/segment_fitness.png" alt="Atleta preparando meal prep con FoodCare" class="audience-img" loading="lazy">
             <span class="audience-tag">💪 Fitness</span>
@@ -255,7 +383,7 @@
   </section>
 
   <!-- ============================================
-       TESTIMONIOS
+       TESTIMONIOS — 3 columns, F-Pattern scan
        ============================================ -->
   <section class="testimonials section-padding" id="testimonios">
     <div class="container">
@@ -357,21 +485,20 @@
         </div>
       </div>
 
-      <!-- Retrospective Video -->
+      <!-- Retrospective Video — Elegant Placeholder -->
       <div class="team-video-section reveal">
         <div class="team-video-intro">
           <h3>📽️ Video de Retrospectiva</h3>
           <p>Conoce nuestro proceso de trabajo, los retos que enfrentamos y los logros que alcanzamos como equipo durante el desarrollo de FoodCare. Un vistazo al esfuerzo colaborativo detrás de Savora.</p>
         </div>
         <div class="team-video-wrapper">
-          <!-- Reemplaza VIDEO_ID_RETRO con el ID real de YouTube -->
-          <iframe 
-            src="https://www.youtube.com/embed/VIDEO_ID_RETRO?rel=0&modestbranding=1" 
-            title="Savora — Video de Retrospectiva del Equipo" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+          <div class="team-video-placeholder" id="video-retro-placeholder">
+            <div class="team-play-btn">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <div class="video-placeholder-label" style="color: var(--gray-700);">Video Próximamente</div>
+            <div class="video-placeholder-sublabel" style="color: var(--gray-400);">Retrospectiva y proceso de trabajo del equipo Savora</div>
+          </div>
         </div>
       </div>
     </div>
@@ -386,7 +513,9 @@
         <!-- Brand -->
         <div class="footer-brand">
           <a href="#inicio" class="logo">
-            <div class="logo-icon">🥗</div>
+            <div class="logo-icon">
+              <img src="assets/images/foodcare_logo.png" alt="FoodCare Logo">
+            </div>
             FoodCare <span>by Savora</span>
           </a>
           <p>Gestiona tu despensa de forma inteligente, reduce el desperdicio alimentario y ahorra dinero cada mes. Una app pensada para ti y para el planeta.</p>
@@ -414,6 +543,7 @@
           <a href="#beneficios">Alertas Preventivas</a>
           <a href="#beneficios">Control de Despensa</a>
           <a href="#beneficios">Recetas Inteligentes</a>
+          <a href="#beneficios">Escáner de IA</a>
           <a href="#beneficios">Meal Prep</a>
         </div>
 

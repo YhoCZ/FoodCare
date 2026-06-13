@@ -1,21 +1,19 @@
 /* ============================================
    FOODCARE — Interactive JavaScript
+   IHC Audited — Counters, Reveals, Placeholders
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Header Scroll Effect ----------
   const header = document.querySelector('.header');
-  let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    if (currentScroll > 50) {
+    if (window.pageYOffset > 50) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-    lastScroll = currentScroll;
   });
 
   // ---------- Mobile Menu Toggle ----------
@@ -28,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileToggle.classList.toggle('active');
     });
 
-    // Close mobile menu on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
@@ -72,49 +69,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   revealElements.forEach(el => revealObserver.observe(el));
 
-  // ---------- Counter Animation ----------
-  const counters = document.querySelectorAll('.stat-number[data-target]');
-  let countersAnimated = false;
+  // ---------- Generic Counter Animation ----------
+  // Works for both hero stats and impact metrics
+  const animateCounter = (counter) => {
+    const target = parseFloat(counter.getAttribute('data-target'));
+    const suffix = counter.getAttribute('data-suffix') || '';
+    const duration = 2000;
+    const isFloat = !Number.isInteger(target);
+    const step = target / (duration / 16);
+    let current = 0;
 
-  const animateCounters = () => {
-    if (countersAnimated) return;
-    countersAnimated = true;
-
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-target'));
-      const suffix = counter.getAttribute('data-suffix') || '';
-      const duration = 2000;
-      const step = target / (duration / 16);
-      let current = 0;
-
-      const updateCounter = () => {
-        current += step;
-        if (current < target) {
+    const updateCounter = () => {
+      current += step;
+      if (current < target) {
+        if (isFloat) {
+          counter.textContent = current.toFixed(1) + suffix;
+        } else {
           counter.textContent = Math.floor(current).toLocaleString() + suffix;
-          requestAnimationFrame(updateCounter);
+        }
+        requestAnimationFrame(updateCounter);
+      } else {
+        if (isFloat) {
+          counter.textContent = target.toFixed(1).replace('.0', '') + suffix;
         } else {
           counter.textContent = target.toLocaleString() + suffix;
         }
-      };
+      }
+    };
 
-      updateCounter();
-    });
+    updateCounter();
   };
 
-  // Observe stats section
-  const statsSection = document.querySelector('.hero-stats');
-  if (statsSection) {
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-          statsObserver.unobserve(entry.target);
+  // Observe all counter elements
+  const allCounters = document.querySelectorAll('[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        if (!counter.dataset.animated) {
+          counter.dataset.animated = 'true';
+          animateCounter(counter);
         }
-      });
-    }, { threshold: 0.5 });
+        counterObserver.unobserve(counter);
+      }
+    });
+  }, { threshold: 0.5 });
 
-    statsObserver.observe(statsSection);
-  }
+  allCounters.forEach(counter => counterObserver.observe(counter));
 
   // ---------- Active Navigation Highlight ----------
   const sections = document.querySelectorAll('section[id]');
@@ -140,26 +141,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Parallax on Hero Elements ----------
   const heroVisual = document.querySelector('.hero-visual');
-  
+
   if (heroVisual && window.innerWidth > 768) {
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
-      const rate = scrolled * 0.3;
-      heroVisual.style.transform = `translateY(${rate * 0.1}px)`;
+      const rate = scrolled * 0.03;
+      heroVisual.style.transform = `translateY(${rate}px)`;
     });
   }
 
-  // ---------- Typed Effect on Hero (subtle) ----------
+  // ---------- Hero H1 Entrance Animation ----------
   const heroH1 = document.querySelector('.hero h1');
   if (heroH1) {
     heroH1.style.opacity = '0';
     heroH1.style.transform = 'translateY(20px)';
-    
+
     setTimeout(() => {
       heroH1.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
       heroH1.style.opacity = '1';
       heroH1.style.transform = 'translateY(0)';
     }, 200);
   }
+
+  // ---------- Video Placeholder Hover Effects ----------
+  const videoPlaceholders = document.querySelectorAll('.video-placeholder, .team-video-placeholder');
+  videoPlaceholders.forEach(placeholder => {
+    placeholder.addEventListener('click', () => {
+      // Future: swap placeholder for iframe when video is ready
+      // For now, gentle feedback animation
+      const playBtn = placeholder.querySelector('.play-btn-large, .team-play-btn');
+      if (playBtn) {
+        playBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          playBtn.style.transform = 'scale(1)';
+        }, 200);
+      }
+    });
+  });
 
 });
