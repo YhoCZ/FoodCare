@@ -277,6 +277,10 @@ h1, h2, h3, h4, h5, h6 {
   height: 20px;
 }
 
+.btn-demo-mobile {
+  display: none;
+}
+
 /* ============================================
    HEADER / NAVIGATION — Z-Pattern Entry
    ============================================ */
@@ -1731,6 +1735,13 @@ h1, h2, h3, h4, h5, h6 {
   .hero {
     min-height: auto;
     padding-top: calc(var(--header-height) + var(--space-2xl));
+  }
+
+  .btn-demo-mobile {
+    display: inline-flex !important;
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--space-md);
   }
 
   .hero-visual {
