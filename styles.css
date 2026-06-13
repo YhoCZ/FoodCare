@@ -1733,10 +1733,8 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: calc(var(--header-height) + var(--space-2xl));
   }
 
-  .hero-carousel {
-    width: 260px;
-    height: 520px;
-    margin: 0 auto;
+  .hero-visual {
+    display: none !important;
   }
 
   /* Horizontal Scroll for Mobile Grids */
@@ -1747,8 +1745,8 @@ h1, h2, h3, h4, h5, h6 {
   .testimonials-grid,
   .team-grid {
     display: flex !important;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
     scroll-snap-type: x mandatory;
     gap: 16px;
     padding-bottom: 20px; /* Space for scrollbar */
@@ -1758,14 +1756,16 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 20px;
   }
 
-  .features-grid > *,
-  .audience-grid > *,
-  .impact-grid > *,
-  .plans-grid > *,
-  .testimonials-grid > *,
-  .team-grid > * {
-    flex: 0 0 85%;
-    max-width: 85%;
+  /* Target all direct children of those grids */
+  .features-grid > div,
+  .audience-grid > div,
+  .impact-grid > div,
+  .plans-grid > div,
+  .testimonials-grid > div,
+  .team-grid > div {
+    flex: 0 0 85% !important;
+    max-width: 85% !important;
+    min-width: 85% !important;
     scroll-snap-align: center;
   }
 
