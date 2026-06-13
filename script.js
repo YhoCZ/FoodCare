@@ -179,4 +179,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ---------- Hero Carousel Logic ----------
+  const carouselSlides = document.querySelectorAll('.carousel-slide');
+  const carouselDots = document.querySelectorAll('.dot');
+  if (carouselSlides.length > 0 && carouselDots.length > 0) {
+    let currentSlide = 0;
+    let carouselInterval;
+
+    const goToSlide = (index) => {
+      carouselSlides[currentSlide].classList.remove('active');
+      carouselDots[currentSlide].classList.remove('active');
+      currentSlide = index;
+      carouselSlides[currentSlide].classList.add('active');
+      carouselDots[currentSlide].classList.add('active');
+    };
+
+    const nextSlide = () => {
+      let next = (currentSlide + 1) % carouselSlides.length;
+      goToSlide(next);
+    };
+
+    const startCarousel = () => {
+      carouselInterval = setInterval(nextSlide, 4000);
+    };
+
+    const resetCarousel = () => {
+      clearInterval(carouselInterval);
+      startCarousel();
+    };
+
+    carouselDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.getAttribute('data-index'));
+        goToSlide(index);
+        resetCarousel();
+      });
+    });
+
+    startCarousel();
+  }
+
 });
