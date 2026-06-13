@@ -559,7 +559,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-phone img {
-  width: 320px;
+  width: 450px;
   height: auto;
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-xl);
@@ -1595,7 +1595,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-phone img {
-    width: 260px;
+    width: 360px;
   }
 
   .floating-card {
@@ -1689,7 +1689,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-phone img {
-    width: 220px;
+    width: 280px;
   }
 
   .features-grid {
