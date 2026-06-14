@@ -41,7 +41,7 @@ body.dark-theme {
 body {
   background: #2a2a2a;
   background-image: radial-gradient(circle at center, #3a3a3a 0%, #1a1a1a 100%);
-  height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  height: 100dvh; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 
 .simulator-wrapper { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
@@ -237,3 +237,29 @@ input:checked + .slider:before { transform: translateX(20px); }
 .scanner-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--green-main); box-shadow: 0 0 10px var(--green-main); animation: scan 2s linear infinite; }
 @keyframes scan { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
 .scanner-text { color: white; text-align: center; margin-top: 20px; font-size: 0.9rem; }
+
+/* ============================================
+   RESPONSIVE / PWA REAL MOBILE FIX
+   ============================================ */
+@media (max-width: 768px) {
+  body {
+    background: var(--bg-color); /* Quitar el fondo difuminado en celular */
+  }
+
+  .back-to-landing {
+    display: none; /* Esconder el botón en móvil para que parezca app nativa */
+  }
+
+  .phone-frame {
+    width: 100% !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+  }
+
+  .phone-notch {
+    display: none !important; /* El celular real ya tiene su propio notch */
+  }
+}
