@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
      ESTADO EN MEMORIA (In-Memory State)
      ============================================== */
   let pantryData = [
-    { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', buyDate: getRelativeDate(-3), date: getRelativeDate(-1) }, // Vencido
-    { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', buyDate: getRelativeDate(-5), date: getRelativeDate(1) }, // Warn
-    { id: 3, name: 'Manzanas', category: 'Frutas/Verduras', qty: '1 kg', buyDate: getRelativeDate(-2), date: getRelativeDate(5) }, // Safe
-    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '2 kg', buyDate: getRelativeDate(-10), date: getRelativeDate(120) }, // Safe
-    { id: 5, name: 'Tupper: Salmón', category: 'Meal Prep', qty: '1 porción', buyDate: getRelativeDate(-1), date: getRelativeDate(2) } // Warn
+    { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', cost: 12.50, buyDate: getRelativeDate(-3), date: getRelativeDate(-1) }, // Vencido
+    { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', cost: 4.50, buyDate: getRelativeDate(-5), date: getRelativeDate(1) }, // Warn
+    { id: 3, name: 'Manzanas', category: 'Frutas/Verduras', qty: '1 kg', cost: 5.00, buyDate: getRelativeDate(-2), date: getRelativeDate(5) }, // Safe
+    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '2 kg', cost: 8.00, buyDate: getRelativeDate(-10), date: getRelativeDate(120) }, // Safe
+    { id: 5, name: 'Tupper: Salmón', category: 'Meal Prep', qty: '1 porción', cost: 0, buyDate: getRelativeDate(-1), date: getRelativeDate(2) } // Warn
   ];
 
-  let reportStats = { savedKg: 2.5, savedMoney: 45.00, wastedItems: 1 };
+  let reportStats = { savedKg: 2.5, savedMoney: 45.00, wastedItems: 1, wastedMoney: 0.00, tuppersPrepared: 3 };
   
   let notifications = [
     { type: 'alert', title: '¡Alerta!', text: 'Tu Leche caduca mañana. Consúmelo pronto para evitar desperdicio.', time: 'Hace 2 horas' },
@@ -156,20 +156,32 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function consumeFood(id) {
-    pantryData = pantryData.filter(item => item.id !== id);
+    const item = pantryData.find(i => i.id === id);
+    if (!item) return;
+    pantryData = pantryData.filter(i => i.id !== id);
     renderPantry();
     
     reportStats.savedKg += 0.5; // Aproximación
-    reportStats.savedMoney += 10.00; // Aproximación
+    reportStats.savedMoney += parseFloat(item.cost) || 0;
     updateReportsUI();
   }
 
-  function deleteFood(id) {
-    pantryData = pantryData.filter(item => item.id !== id);
+  function deleteFood(id, reasonText = "Vencido") {
+    const item = pantryData.find(i => i.id === id);
+    if (!item) return;
+    pantryData = pantryData.filter(i => i.id !== id);
     renderPantry();
     
-    // Simulate adding a waste report
     reportStats.wastedItems++;
+    reportStats.wastedMoney += parseFloat(item.cost) || 0;
+    
+    notifications.unshift({
+      type: 'history',
+      title: 'Alimento Desechado',
+      text: `${item.name} fue retirado de la despensa. Razón: ${reasonText}`,
+      time: 'Justo ahora'
+    });
+
     updateReportsUI();
   }
 
@@ -244,18 +256,78 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('food-name').value = item.name;
     document.getElementById('food-category').value = item.category;
     document.getElementById('food-qty').value = item.qty;
+    document.getElementById('food-cost').value = item.cost || "0.00";
     document.getElementById('food-buy-date').value = item.buyDate;
     document.getElementById('food-date').value = item.date;
     
+    // Reset and show incident section
+    document.getElementById('section-incidentes').classList.remove('hidden');
+    document.getElementById('incident-type').value = "";
+    document.getElementById('incident-partial-group').classList.add('hidden');
+    document.getElementById('btn-report-incident').style.display = 'none';
+
     openModal(modalAddFood);
   }
 
-  function addFoodLogic(name, category, qty, buyDate, expiryDate, id = null) {
+  document.getElementById('incident-type').addEventListener('change', (e) => {
+    const val = e.target.value;
+    const btn = document.getElementById('btn-report-incident');
+    const partialGrp = document.getElementById('incident-partial-group');
+    
+    if (!val) {
+      btn.style.display = 'none';
+      partialGrp.classList.add('hidden');
+    } else {
+      btn.style.display = 'block';
+      if (val === 'partial') {
+        partialGrp.classList.remove('hidden');
+      } else {
+        partialGrp.classList.add('hidden');
+      }
+    }
+  });
+
+  document.getElementById('btn-report-incident').addEventListener('click', () => {
+    const id = parseInt(document.getElementById('food-id').value);
+    const item = pantryData.find(i => i.id === id);
+    if (!item) return;
+
+    const val = document.getElementById('incident-type').value;
+    if (val === 'partial') {
+      const reduceQty = document.getElementById('incident-qty-reduce').value;
+      
+      const matchCurr = item.qty.match(/^([\d.]+)\s*(.*)$/);
+      const matchReduce = reduceQty.match(/^([\d.]+)/);
+
+      if (matchCurr && matchReduce) {
+        let newTotal = parseFloat(matchCurr[1]) - parseFloat(matchReduce[1]);
+        if (newTotal <= 0) {
+          deleteFood(id, "Consumido totalmente");
+          closeModal(modalAddFood);
+          return;
+        }
+        item.qty = `${newTotal} ${matchCurr[2].trim()}`;
+        renderPantry();
+        alert(`Se dedujeron las unidades consumidas. Nuevo stock: ${item.qty}`);
+      } else {
+        alert("Asegúrate de ingresar un número válido a reducir.");
+        return;
+      }
+    } else {
+      let reasons = { cat: "Se lo comió el gato 😼", stolen: "Alguien se lo comió 😠", lost: "Se extravió / aplastó 💥", spoiled: "Se pudrió antes de tiempo 🦠" };
+      deleteFood(id, reasons[val]);
+      alert(`Se ha registrado la incidencia: ${reasons[val]}`);
+    }
+    
+    closeModal(modalAddFood);
+  });
+
+  function addFoodLogic(name, category, qty, cost, buyDate, expiryDate, id = null) {
     if (id) {
       // Edit
       const index = pantryData.findIndex(i => i.id === parseInt(id));
       if(index >= 0) {
-        pantryData[index] = { id: parseInt(id), name, category, qty, buyDate, date: expiryDate };
+        pantryData[index] = { id: parseInt(id), name, category, qty, cost, buyDate, date: expiryDate };
       }
     } else {
       // Add or Merge
@@ -273,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
           pantryData[existing].qty = pantryData[existing].qty + " + " + qty;
         }
       } else {
-        pantryData.push({ id: Date.now(), name, category, qty, buyDate, date: expiryDate });
+        pantryData.push({ id: Date.now(), name, category, qty, cost, buyDate, date: expiryDate });
       }
     }
     
@@ -300,11 +372,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = document.getElementById('food-name').value;
     const cat = document.getElementById('food-category').value;
     const qty = document.getElementById('food-qty').value;
+    const cost = document.getElementById('food-cost').value;
     const bDate = document.getElementById('food-buy-date').value;
     const eDate = document.getElementById('food-date').value;
 
-    addFoodLogic(name, cat, qty, bDate, eDate, id || null);
+    addFoodLogic(name, cat, qty, cost, bDate, eDate, id || null);
     formAddFood.reset();
+    document.getElementById('section-incidentes').classList.add('hidden');
     closeModal(modalAddFood);
   });
 
@@ -376,18 +450,44 @@ document.addEventListener('DOMContentLoaded', () => {
       btnGenerateRecipe.textContent = "Mezclar al azar de nuevo";
       btnGenerateRecipe.classList.remove('hidden');
       btnGenerateCustom.classList.remove('hidden');
-      
-      clearInterval(timerInterval);
-      let time = 20 * 60;
-      const timerEl = document.getElementById('recipe-timer');
-      timerEl.textContent = "20:00";
-      timerInterval = setInterval(() => {
-        time--;
-        timerEl.textContent = `${Math.floor(time/60).toString().padStart(2, '0')}:${(time%60).toString().padStart(2, '0')}`;
-        if(time <= 0) clearInterval(timerInterval);
-      }, 1000);
     }, 1500);
   }
+
+  // Open Detailed Recipe
+  resultRecipe.addEventListener('click', () => {
+    document.getElementById('recipe-detail-title').textContent = "Wok de Pollo y Verduras";
+    document.getElementById('recipe-detail-time').innerHTML = "⏱️ 20 min";
+    document.getElementById('recipe-detail-diff').innerHTML = "🔥 Fácil";
+    document.getElementById('recipe-detail-ingredients').innerHTML = `
+      <li>Pollo (500 g)</li>
+      <li>Verduras mixtas</li>
+      <li>Salsa de Soya</li>
+    `;
+    
+    // Stop any existing timer
+    clearInterval(timerInterval);
+    document.getElementById('recipe-kitchen-timer').textContent = "20:00";
+    document.getElementById('btn-start-kitchen-timer').textContent = "Iniciar Timer";
+    
+    openModal(document.getElementById('modal-recipe-details'));
+  });
+
+  // Kitchen Timer Logic
+  let kitchenTimerValue = 20 * 60;
+  document.getElementById('btn-start-kitchen-timer').addEventListener('click', (e) => {
+    const btn = e.target;
+    if (btn.textContent === "Iniciar Timer") {
+      btn.textContent = "Pausar";
+      timerInterval = setInterval(() => {
+        kitchenTimerValue--;
+        document.getElementById('recipe-kitchen-timer').textContent = `${Math.floor(kitchenTimerValue/60).toString().padStart(2, '0')}:${(kitchenTimerValue%60).toString().padStart(2, '0')}`;
+        if(kitchenTimerValue <= 0) clearInterval(timerInterval);
+      }, 1000);
+    } else {
+      clearInterval(timerInterval);
+      btn.textContent = "Iniciar Timer";
+    }
+  });
 
   btnGenerateRecipe.addEventListener('click', simulateGeneration);
 
@@ -418,11 +518,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateReportsUI() {
     document.getElementById('report-saved-kg').textContent = reportStats.savedKg.toFixed(1) + ' kg';
     document.getElementById('report-saved-money').textContent = 'S/ ' + reportStats.savedMoney.toFixed(2);
-    document.getElementById('report-wasted').textContent = reportStats.wastedItems + ' alimento(s)';
+    
+    const wastedMoneyEl = document.getElementById('report-wasted-money');
+    if (wastedMoneyEl) {
+      wastedMoneyEl.textContent = 'S/ ' + reportStats.wastedMoney.toFixed(2);
+      document.getElementById('report-wasted-items').textContent = reportStats.wastedItems + ' alimento(s) perdidos';
+    } else {
+      // Fallback si no está
+      if (document.getElementById('report-wasted')) {
+        document.getElementById('report-wasted').textContent = reportStats.wastedItems + ' alimento(s)';
+      }
+    }
+    
+    if (document.getElementById('report-tuppers-count')) {
+      document.getElementById('report-tuppers-count').textContent = reportStats.tuppersPrepared;
+    }
   }
 
   document.getElementById('btn-consume-now').addEventListener('click', () => {
-    // Busca pollo
     pantryData = pantryData.filter(i => !i.name.toLowerCase().includes('pollo'));
     reportStats.savedKg += 0.5; reportStats.savedMoney += 12.50;
     
@@ -430,20 +543,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     updateReportsUI();
     renderPantry();
-    alert("¡Excelente! Has consumido tus alimentos a tiempo.");
+    alert("Marcado como consumido. ¡Buen provecho!");
     resultRecipe.classList.add('hidden');
+    closeModal(document.getElementById('modal-recipe-details'));
   });
 
   document.getElementById('btn-meal-prep').addEventListener('click', () => {
     pantryData = pantryData.filter(i => !i.name.toLowerCase().includes('pollo'));
-    addFoodLogic('Tupper: Pollo', 'Meal Prep', '1 porción', getRelativeDate(0), getRelativeDate(3));
+    addFoodLogic('Tupper: Pollo', 'Meal Prep', '1 porción', 0, getRelativeDate(0), getRelativeDate(3));
     reportStats.savedKg += 0.5;
+    reportStats.tuppersPrepared++;
     
     notifications.unshift({ type: 'history', title: 'Tupper Guardado', text: 'Has preparado Pollo. ¡Listo para la semana!', time: 'Justo ahora' });
     
     updateReportsUI();
-    alert("¡Meal Prep guardado en tu Despensa!");
+    alert("¡Guardado en tu Despensa como Meal Prep!");
     resultRecipe.classList.add('hidden');
+    
+    // Switch to pantry view so user sees it
+    const pantryNav = document.querySelector('.nav-item[data-target="view-despensa"]');
+    if (pantryNav) pantryNav.click();
+    closeModal(document.getElementById('modal-recipe-details'));
   });
 
   document.getElementById('btn-download-pdf').addEventListener('click', () => {
@@ -471,6 +591,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-edit-profile').addEventListener('click', () => {
     openModal(document.getElementById('modal-edit-profile'));
   });
+
+  // Change profile photo logic
+  const btnChangePhoto = document.getElementById('btn-change-photo');
+  if (btnChangePhoto) {
+    btnChangePhoto.addEventListener('click', () => {
+      // Simulate file picker by immediately changing photo to a different random face
+      const img = document.getElementById('profile-photo-img');
+      img.src = 'https://i.pravatar.cc/150?img=' + Math.floor(Math.random() * 70);
+      alert('¡Foto de perfil actualizada!');
+    });
+  }
 
   document.getElementById('form-edit-profile').addEventListener('submit', (e) => {
     e.preventDefault();

@@ -94,7 +94,6 @@
           <div class="view-header">
             <h3>IA Recetas</h3>
             <p class="subtitle">Encuentra qué cocinar con lo que tienes antes de que caduque.</p>
-          </div>
           <div class="ia-container">
             
             <div id="recipe-suggestions" style="text-align:left; margin-bottom: 20px;">
@@ -220,12 +219,21 @@
             </div>
           </div>
 
-          <div class="report-card alert-card">
-            <div class="report-icon danger">🥀</div>
+          <div class="report-card" style="margin-top: 10px;">
+            <div class="report-icon" style="background: var(--color-danger-bg); color: var(--color-danger);">💸</div>
             <div class="report-info">
-              <h4>Pasaron a mejor vida</h4>
-              <div class="report-value" id="report-wasted">1 alimento</div>
-              <p class="report-subtext">¡No te preocupes! La próxima semana seguro salvamos más. 💚</p>
+              <h4>Dinero Perdido</h4>
+              <div class="report-value" id="report-wasted-money" style="color: var(--color-danger);">S/ 0.00</div>
+              <p class="report-subtext" id="report-wasted-items">0 alimentos desechados</p>
+            </div>
+          </div>
+          
+          <div class="report-card" style="margin-top: 10px;">
+            <div class="report-icon" style="background: #f3e5f5; color: #9c27b0;">🍱</div>
+            <div class="report-info">
+              <h4>Tuppers Preparados</h4>
+              <div class="report-value" id="report-tuppers-count">0</div>
+              <p class="report-subtext">Planificación de esta semana</p>
             </div>
           </div>
         </section>
@@ -241,15 +249,14 @@
               </svg>
             </button>
           </div>
-          
-          <div class="profile-header">
-            <div class="profile-avatar">U</div>
-            <div>
-              <h4 id="profile-name-display">Usuario Demo</h4>
-              <p class="subtitle">Plan Básico</p>
+          <div class="profile-header" style="text-align: center; margin-bottom: 30px; margin-top: 20px;">
+            <div style="position: relative; display: inline-block;">
+              <img src="assets/images/user_placeholder.png" alt="Usuario" id="profile-photo-img" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--green-main); background: var(--bg-card); font-size: 0; line-height: 100px; text-align: center;" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23ccc\'><circle cx=\'50\' cy=\'50\' r=\'50\'/></svg>'">
+              <button id="btn-change-photo" title="Cambiar foto" style="position: absolute; bottom: 0; right: 0; background: var(--green-main); color: white; border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: var(--shadow-sm);">📷</button>
             </div>
+            <h2 id="profile-name-display" style="margin-top: 10px;">Usuario Demo</h2>
+            <p>usuario@savora.com</p>
           </div>
-
           <div class="settings-group">
             <h5>Configuraciones de Alertas</h5>
             <div class="setting-item-col">
@@ -342,7 +349,7 @@
       <!-- MODALES SOBREPUESTOS -->
       
       <!-- Modal Notificaciones -->
-      <div class="modal-overlay hidden" id="modal-notifications">
+      <div class="modal-overlay hidden full-screen-view" id="modal-notifications">
         <div class="modal-content notification-panel">
           <div class="modal-header">
             <h4>Notificaciones</h4>
@@ -393,39 +400,107 @@
             <button class="btn-close" data-close="modal-add-food">✖</button>
           </div>
           <form id="form-add-food">
-            <input type="hidden" id="food-id" value="">
+            <input type="hidden" id="food-id">
             <div class="form-group">
-              <label>Nombre del producto</label>
-              <input type="text" id="food-name" required placeholder="Ej. Manzanas">
+              <label>Nombre del Producto</label>
+              <input type="text" id="food-name" required placeholder="Ej: Pollo">
             </div>
-            <div class="form-group-row">
-              <div class="form-group half">
-                <label>Categoría</label>
-                <select id="food-category">
-                  <option value="Frutas/Verduras">Frutas/Verduras</option>
-                  <option value="Carnes">Carnes</option>
-                  <option value="Lácteos">Lácteos</option>
-                  <option value="Despensa Seca">Despensa Seca</option>
-                  <option value="Meal Prep">Meal Prep</option>
+            <div class="form-group">
+              <label>Categoría</label>
+              <select id="food-category">
+                <option value="Carnes">Carnes</option>
+                <option value="Lácteos">Lácteos</option>
+                <option value="Frutas/Verduras">Frutas/Verduras</option>
+                <option value="Despensa Seca">Despensa Seca</option>
+                <option value="Meal Prep">Meal Prep</option>
+              </select>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <div class="form-group" style="flex: 1;">
+                <label>Cantidad</label>
+                <input type="text" id="food-qty" required placeholder="Ej: 500 g">
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Costo (S/)</label>
+                <input type="number" step="0.10" id="food-cost" required placeholder="Ej: 15.50" value="0.00">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Fecha de Compra</label>
+              <input type="date" id="food-buy-date" required>
+            </div>
+            <div class="form-group">
+              <label>Fecha de Vencimiento Estimada</label>
+              <input type="date" id="food-date" required>
+            </div>
+            
+            <div id="section-incidentes" class="hidden" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+              <h4 style="color: var(--color-danger); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">⚠️ Reportar Incidencia</h4>
+              <div class="form-group">
+                <label>¿Pasó algo externo?</label>
+                <select id="incident-type">
+                  <option value="">Todo bien...</option>
+                  <option value="partial">🍽️ Consumí solo una parte</option>
+                  <option value="cat">😼 El gato se lo comió</option>
+                  <option value="stolen">😠 Alguien se lo comió en el trabajo</option>
+                  <option value="lost">💥 Se cayó / aplastó / extravió</option>
+                  <option value="spoiled">🦠 Se pudrió antes de tiempo</option>
                 </select>
               </div>
-              <div class="form-group half">
-                <label>Cantidad (Ej. 2 kg, 1 ud)</label>
-                <input type="text" id="food-qty" required placeholder="1 unidad">
+              <div class="form-group hidden" id="incident-partial-group">
+                <label>Cantidad consumida a restar</label>
+                <input type="text" id="incident-qty-reduce" placeholder="Ej: 200">
               </div>
+              <button type="button" class="btn-main" id="btn-report-incident" style="background: var(--color-danger); display: none;">Registrar Incidente</button>
             </div>
-            <div class="form-group-row">
-              <div class="form-group half">
-                <label>Fecha de Compra</label>
-                <input type="date" id="food-buy-date" required>
-              </div>
-              <div class="form-group half">
-                <label>Fecha de Caducidad</label>
-                <input type="date" id="food-date" required>
-              </div>
-            </div>
-            <button type="submit" class="btn-main">Guardar en Despensa</button>
+
+            <button type="submit" class="btn-main" id="btn-save-food" style="margin-top: 15px;">Guardar</button>
           </form>
+        </div>
+      </div>
+
+      <!-- Modal Recipe Details -->
+      <div class="modal-overlay hidden" id="modal-recipe-details">
+        <div class="modal-content form-panel" style="max-width: 500px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 0;">
+          <div style="position: relative; width: 100%; height: 200px; background: #000;">
+            <img src="assets/images/recipe_placeholder.jpg" id="recipe-video-thumb" alt="Video cover" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23333\'><rect width=\'100\' height=\'100\'/></svg>'">
+            <button id="btn-play-video" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,0,0,0.8); color: white; border: none; border-radius: 50%; width: 60px; height: 60px; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">▶</button>
+            <button class="btn-close" data-close="modal-recipe-details" style="position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.5); color: white; border: none; width: 30px; height: 30px; border-radius: 50%;">✖</button>
+          </div>
+          <div style="padding: 20px;">
+            <h3 id="recipe-detail-title" style="margin-bottom: 5px;">Receta Generada</h3>
+            <div class="recipe-meta" style="margin-bottom: 15px; display: flex; gap: 15px; font-size: 0.9rem; color: var(--text-muted);">
+              <span id="recipe-detail-time">⏱️ 20 min</span>
+              <span id="recipe-detail-diff">🔥 Fácil</span>
+            </div>
+            
+            <div style="background: var(--color-safe-bg); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+              <h4 style="color: var(--green-dark); margin-bottom: 10px;">Ingredientes a usar:</h4>
+              <ul id="recipe-detail-ingredients" style="margin-left: 20px; font-size: 0.9rem; line-height: 1.6;">
+                <li>...</li>
+              </ul>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <h4 style="margin-bottom: 10px;">Paso a Paso</h4>
+              <ol id="recipe-detail-steps" style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6;">
+                <li>Prepara los ingredientes lavándolos bien.</li>
+                <li>Mezcla todo en un tazón mediano.</li>
+                <li>Cocina a fuego medio por 15 minutos.</li>
+                <li>Sirve y disfruta antes de que se desperdicie.</li>
+              </ol>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+              <div style="font-size: 2rem; font-weight: bold; font-family: monospace;" id="recipe-kitchen-timer">00:00</div>
+              <button class="btn-secondary-small" id="btn-start-kitchen-timer" style="margin-top: 10px;">Iniciar Timer</button>
+            </div>
+
+            <div class="recipe-actions" style="display: flex; gap: 10px;">
+              <button class="btn-primary-small" id="btn-consume-now" style="flex:1;">Consumir</button>
+              <button class="btn-secondary-small" id="btn-meal-prep" style="flex:1;">Guardar</button>
+            </div>
+          </div>
         </div>
       </div>
 
