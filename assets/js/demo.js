@@ -1,23 +1,20 @@
-/* ============================================
-   FOODCARE — Demo Interactiva JS (Prototipo V3)
-   ============================================ */
+/* FOODCARE — Demo Interactiva JS (Prototipo V3) */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ==============================================
-     ESTADO EN MEMORIA (In-Memory State)
-     ============================================== */
+  /* ESTADO EN MEMORIA (In-Memory State*/
   let pantryData = [
     { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', cost: 12.50, buyDate: getRelativeDate(-3), date: getRelativeDate(-1) }, // Vencido
     { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', cost: 4.50, buyDate: getRelativeDate(-5), date: getRelativeDate(1) }, // Warn
     { id: 3, name: 'Manzanas', category: 'Frutas/Verduras', qty: '1 kg', cost: 5.00, buyDate: getRelativeDate(-2), date: getRelativeDate(5) }, // Safe
-    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '2 kg', cost: 8.00, buyDate: getRelativeDate(-10), date: getRelativeDate(120) }, // Safe
+    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '4 kg', cost: 8.00, buyDate: getRelativeDate(-10), date: getRelativeDate(120) }, // Safe
     { id: 5, name: 'Tupper: Salmón', category: 'Meal Prep', qty: '1 porción', cost: 0, buyDate: getRelativeDate(-1), date: getRelativeDate(2) } // Warn
   ];
 
   let reportStats = { savedKg: 2.5, savedMoney: 45.00, wastedItems: 1, wastedMoney: 0.00, tuppersPrepared: 3 };
   
   // Settings State
+  //Deberían ir mas estados, sobre todo simular el online y lo del CO2 metricas
   let currentDiet = "Omnívora";
   let isImperial = false;
   let currentLang = "es";
@@ -29,9 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'history', title: 'Comida salvada', text: '¡Consumiste las Manzanas a tiempo! Ahorraste S/ 4.50', time: 'Ayer' }
   ];
 
-  /* ==============================================
-     DICCIONARIO DE IDIOMAS (SIMULADO)
-     ============================================== */
+  /* DICCIONARIO DE IDIOMAS (SIMULADO)*/
   const i18n = {
     es: {
       sugerencias_hoy: "Sugerencias para hoy", diff_all: "Dificultad: Todas", diff_easy: "Principiante", diff_hard: "Avanzado",
@@ -70,9 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else document.querySelector('#view-despensa h3').textContent = 'Mi Despensa';
   }
 
-  /* ==============================================
-     NAVEGACIÓN ENTRE PESTAÑAS
-     ============================================== */
+  /*      NAVEGACIÓN ENTRE PESTAÑAS   */
   const navItems = document.querySelectorAll('.nav-item');
   const views = document.querySelectorAll('.view');
 
@@ -87,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==============================================
+  /* 
      UTILIDADES
-     ============================================== */
+  */
   function getRelativeDate(daysOffset) {
     const date = new Date();
     date.setDate(date.getDate() + daysOffset);
@@ -132,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ==============================================
+  /* 
      RENDERIZADO Y GESTIÓN DE DESPENSA
-     ============================================== */
+  */
   const foodListEl = document.getElementById('food-list');
   const summaryEl = document.getElementById('pantry-summary');
   
@@ -274,9 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderPantry();
 
-  /* ==============================================
+  /* 
      MODALES Y ACTION SHEET
-     ============================================== */
+  */
   function openModal(modal) { modal.classList.remove('hidden'); }
   function closeModal(modal) { modal.classList.add('hidden'); }
 
@@ -315,9 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-scan-receipt').addEventListener('click', startScanner);
   document.getElementById('btn-scan-barcode').addEventListener('click', startScanner);
 
-  /* ==============================================
+  /* 
      FORMULARIO MANUAL (ADD / EDIT)
-     ============================================== */
+  */
   const modalAddFood = document.getElementById('modal-add-food');
   const formAddFood = document.getElementById('form-add-food');
   
@@ -465,9 +458,9 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal(modalAddFood);
   });
 
-  /* ==============================================
+  /* 
      NOTIFICACIONES
-     ============================================== */
+   */
   const notiList = document.getElementById('notifications-list');
   function renderNotifications(tab = 'Nuevas') {
     notiList.innerHTML = '';
@@ -511,9 +504,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==============================================
+  /* 
      IA RECETAS Y REPORTES
-     ============================================== */
+   */
   const btnGenerateRecipe = document.getElementById('btn-generate-recipe');
   const btnGenerateCustom = document.getElementById('btn-generate-custom');
   const loaderRecipe = document.getElementById('recipe-loader');
@@ -707,9 +700,9 @@ document.addEventListener('DOMContentLoaded', () => {
     alert("Descargando reporte en PDF... (Simulación)");
   });
 
-  /* ==============================================
+  /* 
      PERFIL Y CONFIG
-     ============================================== */
+  */
   document.getElementById('setting-diet').addEventListener('change', (e) => {
     currentDiet = e.target.value;
   });
@@ -795,9 +788,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnChangePhoto = document.getElementById('btn-change-photo');
   if (btnChangePhoto) {
     btnChangePhoto.addEventListener('click', () => {
-      // Simulate file picker by immediately changing photo to a different random face
+      // Change the profile photo to a fixed public image URL
       const img = document.getElementById('profile-photo-img');
-      img.src = 'https://i.pravatar.cc/150?img=' + Math.floor(Math.random() * 70);
+      img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXcVXXIl_YlYXY7SaeY1grIFTpYbjje1UE9rr6rwBPkQ&s';
       alert('¡Foto de perfil actualizada!');
     });
   }
