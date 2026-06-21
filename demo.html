@@ -102,11 +102,12 @@
                 <select id="filter-difficulty" style="padding: 3px 8px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 0.8rem; outline: none;">
                   <option value="all" data-i18n="diff_all">Dificultad: Todas</option>
                   <option value="Principiante" data-i18n="diff_easy">Principiante</option>
+                  <option value="Media" data-i18n="diff_medium">Media</option>
                   <option value="Avanzado" data-i18n="diff_hard">Avanzado</option>
                 </select>
               </div>
               
-              <div class="recipe-card" style="margin-top:0; margin-bottom:15px; padding:15px; animation:none; box-shadow:var(--shadow-sm);">
+              <div class="recipe-card suggestion-card" style="margin-top:0; margin-bottom:15px; padding:15px; animation:none; box-shadow:var(--shadow-sm);" data-difficulty="Media">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                   <div>
                     <strong style="color: var(--color-warn); font-size: 1.05rem;">Pollo al Limón con Verduras</strong>
@@ -124,7 +125,7 @@
                 </div>
               </div>
 
-              <div class="recipe-card" style="margin-top:0; margin-bottom:15px; padding:15px; animation:none; box-shadow:var(--shadow-sm);">
+              <div class="recipe-card suggestion-card" style="margin-top:0; margin-bottom:15px; padding:15px; animation:none; box-shadow:var(--shadow-sm);" data-difficulty="Principiante">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                   <div>
                     <strong style="color: var(--color-danger); font-size: 1.05rem;">Batido de Leche y Manzana</strong>
@@ -134,7 +135,7 @@
                 </div>
                 <div class="recipe-meta" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color);">
                   <span>⏱️ 5 min</span>
-                  <span>🔥 Dificultad: Fácil</span>
+                  <span>🔥 Dificultad: Principiante</span>
                 </div>
                 <div class="recipe-actions">
                   <button class="btn-primary-small" onclick="alert('¡Batido preparado! Salvaste la Leche.'); document.getElementById('recipe-suggestions').style.display='none';">Preparar Ahora</button>
@@ -314,25 +315,6 @@
                 <option value="dark">Oscuro</option>
               </select>
             </div>
-            <div class="setting-item" style="cursor: pointer;" onclick="alert('Vibración accionada (Simulación)')">
-              <span>📳 Vibración de botones</span>
-              <span style="color: var(--text-muted);">Probar &gt;</span>
-            </div>
-            <div class="setting-item-col" style="margin-top: 10px;">
-              <label style="font-size: 0.9rem; margin-bottom: 10px;">📏 Unidades</label>
-              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;">
-                <span>Masa/Volumen:</span>
-                <select id="setting-units-mass" style="border: none; background: transparent; text-align: right; outline: none;"><option>kg/L</option><option>lb/oz</option></select>
-              </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px;">
-                <span>Longitud:</span>
-                <select id="setting-units-length" style="border: none; background: transparent; text-align: right; outline: none;"><option>cm/m</option><option>in/ft</option></select>
-              </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                <span>Energía:</span>
-                <select id="setting-units-energy" style="border: none; background: transparent; text-align: right; outline: none;"><option>kcal</option><option>kJ</option></select>
-              </div>
-            </div>
           </div>
 
           <div class="settings-group">
@@ -366,8 +348,8 @@
           <span>Despensa</span>
         </a>
         <a href="#" class="nav-item" data-target="view-recetas">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
           </svg>
           <span>Recetas</span>
         </a>
