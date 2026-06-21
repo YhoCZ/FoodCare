@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
      ESTADO EN MEMORIA (In-Memory State)
      ============================================== */
   let pantryData = [
-    { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', cost: 12.50, buyDate: getRelativeDate(-3), date: getRelativeDate(-1) }, // Vencido
-    { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', cost: 4.50, buyDate: getRelativeDate(-5), date: getRelativeDate(1) }, // Warn
-    { id: 3, name: 'Manzanas', category: 'Frutas/Verduras', qty: '1 kg', cost: 5.00, buyDate: getRelativeDate(-2), date: getRelativeDate(5) }, // Safe
-    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '2 kg', cost: 8.00, buyDate: getRelativeDate(-10), date: getRelativeDate(120) }, // Safe
-    { id: 5, name: 'Tupper: Salmón', category: 'Meal Prep', qty: '1 porción', cost: 0, buyDate: getRelativeDate(-1), date: getRelativeDate(2) } // Warn
+    { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', cost: 12.50, buyDate: getRelativeDate(-3), date: getRelativeDate(-1), color: 'Azul' }, // Vencido
+    { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', cost: 4.50, buyDate: getRelativeDate(-5), date: getRelativeDate(1), color: 'Amarillo' }, // Warn
+    { id: 3, name: 'Manzanas', category: 'Frutas/Verduras', qty: '1 kg', cost: 5.00, buyDate: getRelativeDate(-2), date: getRelativeDate(5), color: 'Blanco' }, // Safe
+    { id: 4, name: 'Arroz', category: 'Despensa Seca', qty: '2 kg', cost: 8.00, buyDate: getRelativeDate(-10), date: getRelativeDate(120), color: '' }, // Safe
+    { id: 5, name: 'Tupper: Salmón', category: 'Meal Prep', qty: '1 porción', cost: 0, buyDate: getRelativeDate(-1), date: getRelativeDate(2), color: 'Morado' } // Warn
   ];
 
   let reportStats = { savedKg: 2.5, savedMoney: 45.00, wastedItems: 1, wastedMoney: 0.00, tuppersPrepared: 3 };
@@ -141,17 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderPantry() {
     foodListEl.innerHTML = '';
     
-    // Filtros
+    // Aplicar Filtros
     const searchText = document.getElementById('search-food').value.toLowerCase();
     const catVal = document.getElementById('filter-category').value;
     const statVal = document.getElementById('filter-status').value;
-    
+    const colorVal = document.getElementById('filter-color').value;
+
     let filteredData = pantryData.filter(item => {
       const matchSearch = item.name.toLowerCase().includes(searchText);
       const matchCat = catVal === 'all' || item.category === catVal;
       const status = getSemaphoreStatus(item.date);
       const matchStat = statVal === 'all' || status.id === statVal;
-      return matchSearch && matchCat && matchStat;
+      const matchColor = colorVal === 'all' || item.color === colorVal;
+      return matchSearch && matchCat && matchStat && matchColor;
     });
 
     // Ordenar: Danger (1) -> Warn (2) -> Safe (3)
@@ -186,12 +188,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `<button class="btn-action" data-id="${item.id}" data-action="delete" title="Borrar (Vencido)">🗑️</button>`
         : `<button class="btn-action" data-id="${item.id}" data-action="consume" title="Consumir a tiempo">🍽️</button>`;
 
+      const colorMap = {
+        'Azul': '🔵',
+        'Morado': '🟣',
+        'Amarillo': '🟡',
+        'Blanco': '⚪',
+        'Negro': '⚫'
+      };
+      const colorIcon = item.color && colorMap[item.color] ? `<span title="Etiqueta ${item.color}">${colorMap[item.color]}</span> ` : '';
+
       const foodHtml = `
         <div class="food-item ${colorClass}" id="card-${item.id}">
           <div class="food-info" style="cursor: pointer;" data-action="view-tip" data-cat="${item.category}">
             <div class="food-icon">${icon}</div>
             <div class="food-details">
-              <h4>${item.name} <span style="font-size:0.8rem; font-weight:normal; opacity:0.8;">(${formatQty(item.qty)})</span></h4>
+              <h4>${colorIcon}${item.name} <span style="font-size:0.8rem; font-weight:normal; opacity:0.8;">(${formatQty(item.qty)})</span></h4>
               <p>${item.category} • ${status.text}</p>
             </div>
           </div>
@@ -268,10 +279,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateReportsUI();
   }
 
+  // Escuchar cambios en los filtros y búsqueda
   document.getElementById('search-food').addEventListener('input', renderPantry);
   document.getElementById('filter-category').addEventListener('change', renderPantry);
   document.getElementById('filter-status').addEventListener('change', renderPantry);
+  document.getElementById('filter-color').addEventListener('change', renderPantry);
 
+  // Inicializar vista
   renderPantry();
 
   /* ==============================================
@@ -314,6 +328,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.getElementById('btn-scan-receipt').addEventListener('click', startScanner);
   document.getElementById('btn-scan-barcode').addEventListener('click', startScanner);
+  
+  document.getElementById('btn-voice-entry').addEventListener('click', () => {
+    closeModal(modalAddOptions);
+    alert('🎙️ Escuchando... (Funcionalidad de registro por voz en desarrollo)');
+  });
+  
+  document.getElementById('btn-photo-entry').addEventListener('click', () => {
+    closeModal(modalAddOptions);
+    alert('📸 Abriendo cámara... (Funcionalidad de reconocimiento fotográfico en desarrollo)');
+  });
 
   /* ==============================================
      FORMULARIO MANUAL (ADD / EDIT)
@@ -342,6 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('food-cost').value = item.cost || "0.00";
     document.getElementById('food-buy-date').value = item.buyDate;
     document.getElementById('food-date').value = item.date;
+    document.getElementById('food-color').value = item.color || "";
     
     // Reset and show incident section
     document.getElementById('section-incidentes').classList.remove('hidden');
@@ -405,16 +430,16 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal(modalAddFood);
   });
 
-  function addFoodLogic(name, category, qty, cost, buyDate, expiryDate, id = null) {
+  function addFoodLogic(name, category, qty, cost, buyDate, expiryDate, color, id = null) {
     if (id) {
       // Edit
       const index = pantryData.findIndex(i => i.id === parseInt(id));
       if(index >= 0) {
-        pantryData[index] = { id: parseInt(id), name, category, qty, cost, buyDate, date: expiryDate };
+        pantryData[index] = { id: parseInt(id), name, category, qty, cost, buyDate, date: expiryDate, color };
       }
     } else {
       // Add or Merge
-      const existing = pantryData.findIndex(i => i.name.toLowerCase() === name.toLowerCase() && i.date === expiryDate);
+      const existing = pantryData.findIndex(i => i.name.toLowerCase() === name.toLowerCase() && i.date === expiryDate && i.color === color);
       if (existing >= 0) {
         // Fix string sum for qty (e.g. 1 kg + 2 kg = 3 kg)
         const currentQtyStr = pantryData[existing].qty;
@@ -428,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
           pantryData[existing].qty = pantryData[existing].qty + " + " + qty;
         }
       } else {
-        pantryData.push({ id: Date.now(), name, category, qty, cost, buyDate, date: expiryDate });
+        pantryData.push({ id: Date.now(), name, category, qty, cost, buyDate, date: expiryDate, color });
       }
     }
     
@@ -458,8 +483,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const cost = document.getElementById('food-cost').value;
     const bDate = document.getElementById('food-buy-date').value;
     const eDate = document.getElementById('food-date').value;
+    const color = document.getElementById('food-color').value;
 
-    addFoodLogic(name, cat, qty, cost, bDate, eDate, id || null);
+    addFoodLogic(name, cat, qty, cost, bDate, eDate, color, id || null);
     formAddFood.reset();
     document.getElementById('section-incidentes').classList.add('hidden');
     closeModal(modalAddFood);
