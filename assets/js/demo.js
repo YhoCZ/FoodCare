@@ -1,12 +1,8 @@
-/* ============================================
-   FOODCARE — Demo Interactiva JS (Prototipo V3)
-   ============================================ */
+/* FOODCARE — Demo Interactiva JS (Prototipo V3) */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ==============================================
-     ESTADO EN MEMORIA (In-Memory State)
-     ============================================== */
+  /* ESTADO EN MEMORIA (In-Memory State*/
   let pantryData = [
     { id: 1, name: 'Pollo', category: 'Carnes', qty: '500 g', cost: 12.50, buyDate: getRelativeDate(-3), date: getRelativeDate(-1), color: 'Azul' }, // Vencido
     { id: 2, name: 'Leche', category: 'Lácteos', qty: '1 L', cost: 4.50, buyDate: getRelativeDate(-5), date: getRelativeDate(1), color: 'Amarillo' }, // Warn
@@ -18,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let reportStats = { savedKg: 2.5, savedMoney: 45.00, wastedItems: 1, wastedMoney: 0.00, tuppersPrepared: 3 };
   
   // Settings State
+  //Deberían ir mas estados, sobre todo simular el online y lo del CO2 metricas
   let currentDiet = "Omnívora";
   let isImperial = false;
   let currentLang = "es";
@@ -29,26 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'history', title: 'Comida salvada', text: '¡Consumiste las Manzanas a tiempo! Ahorraste S/ 4.50', time: 'Ayer' }
   ];
 
-  /* ==============================================
-     DICCIONARIO DE IDIOMAS (SIMULADO)
-     ============================================== */
+  /* DICCIONARIO DE IDIOMAS (SIMULADO)*/
   const i18n = {
     es: {
-      sugerencias_hoy: "Sugerencias para hoy", diff_all: "Dificultad: Todas", diff_easy: "Principiante", diff_hard: "Avanzado",
+      sugerencias_hoy: "Sugerencias para hoy", diff_all: "Dificultad: Todas", diff_easy: "Principiante", diff_medium: "Media", diff_hard: "Avanzado",
       config_title: "Configuraciones de Cuenta", label_diet: "Dieta Preferida:", diet_omni: "Omnívora", diet_veg: "Vegetariana", diet_vegan: "Vegana",
       label_units: "Sistema de Medición:", unit_metric: "Métrico (kg, g, ml)", unit_imperial: "Imperial (lb, oz, fl)",
       label_lang: "Idioma de la App:", alert_title: "Alertas y Vacaciones", vacation_mode: "Modo Vacaciones (Días)",
       btn_sync: "Sincronizar Datos", edit_profile_title: "Editar Perfil", label_name: "Nombre", btn_save: "Guardar Cambios", btn_consume: "Consumir"
     },
     en: {
-      sugerencias_hoy: "Today's Suggestions", diff_all: "Difficulty: All", diff_easy: "Beginner", diff_hard: "Advanced",
+      sugerencias_hoy: "Today's Suggestions", diff_all: "Difficulty: All", diff_easy: "Beginner", diff_medium: "Medium", diff_hard: "Advanced",
       config_title: "Account Settings", label_diet: "Preferred Diet:", diet_omni: "Omnivore", diet_veg: "Vegetarian", diet_vegan: "Vegan",
       label_units: "Measurement System:", unit_metric: "Metric (kg, g, ml)", unit_imperial: "Imperial (lb, oz, fl)",
       label_lang: "App Language:", alert_title: "Alerts & Vacation", vacation_mode: "Vacation Mode (Days)",
       btn_sync: "Sync Data", edit_profile_title: "Edit Profile", label_name: "Name", btn_save: "Save Changes", btn_consume: "Consume"
     },
     pt: {
-      sugerencias_hoy: "Sugestões de Hoje", diff_all: "Dificuldade: Todas", diff_easy: "Iniciante", diff_hard: "Avançado",
+      sugerencias_hoy: "Sugestões de Hoje", diff_all: "Dificuldade: Todas", diff_easy: "Iniciante", diff_medium: "Média", diff_hard: "Avançado",
       config_title: "Configurações da Conta", label_diet: "Dieta Preferida:", diet_omni: "Onívoro", diet_veg: "Vegetariano", diet_vegan: "Vegano",
       label_units: "Sistema de Medição:", unit_metric: "Métrico (kg, g, ml)", unit_imperial: "Imperial (lb, oz, fl)",
       label_lang: "Idioma do App:", alert_title: "Alertas e Férias", vacation_mode: "Modo Férias (Dias)",
@@ -70,9 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else document.querySelector('#view-despensa h3').textContent = 'Mi Despensa';
   }
 
-  /* ==============================================
-     NAVEGACIÓN ENTRE PESTAÑAS
-     ============================================== */
+  /*      NAVEGACIÓN ENTRE PESTAÑAS   */
   const navItems = document.querySelectorAll('.nav-item');
   const views = document.querySelectorAll('.view');
 
@@ -87,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==============================================
+  /* 
      UTILIDADES
-     ============================================== */
+  */
   function getRelativeDate(daysOffset) {
     const date = new Date();
     date.setDate(date.getDate() + daysOffset);
@@ -132,9 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ==============================================
+  /* 
      RENDERIZADO Y GESTIÓN DE DESPENSA
-     ============================================== */
+  */
   const foodListEl = document.getElementById('food-list');
   const summaryEl = document.getElementById('pantry-summary');
   
@@ -288,9 +281,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar vista
   renderPantry();
 
-  /* ==============================================
+  /* 
      MODALES Y ACTION SHEET
-     ============================================== */
+  */
   function openModal(modal) { modal.classList.remove('hidden'); }
   function closeModal(modal) { modal.classList.add('hidden'); }
 
@@ -339,9 +332,9 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('📸 Abriendo cámara... (Funcionalidad de reconocimiento fotográfico en desarrollo)');
   });
 
-  /* ==============================================
+  /* 
      FORMULARIO MANUAL (ADD / EDIT)
-     ============================================== */
+  */
   const modalAddFood = document.getElementById('modal-add-food');
   const formAddFood = document.getElementById('form-add-food');
   
@@ -491,9 +484,9 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal(modalAddFood);
   });
 
-  /* ==============================================
+  /* 
      NOTIFICACIONES
-     ============================================== */
+   */
   const notiList = document.getElementById('notifications-list');
   function renderNotifications(tab = 'Nuevas') {
     notiList.innerHTML = '';
@@ -537,9 +530,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ==============================================
+  /* 
      IA RECETAS Y REPORTES
-     ============================================== */
+   */
   const btnGenerateRecipe = document.getElementById('btn-generate-recipe');
   const btnGenerateCustom = document.getElementById('btn-generate-custom');
   const loaderRecipe = document.getElementById('recipe-loader');
@@ -553,18 +546,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const diffFilter = document.getElementById('filter-difficulty').value;
-    
     // Diet filtering
     let availableIngredients = pantryData.filter(i => i.category !== 'Meal Prep');
     if (currentDiet === 'Vegetariana') availableIngredients = availableIngredients.filter(i => i.category !== 'Carnes');
     if (currentDiet === 'Vegana') availableIngredients = availableIngredients.filter(i => i.category !== 'Carnes' && i.category !== 'Lácteos');
-
-    // Difficulty filtering mock
-    if (diffFilter === 'Avanzado' && availableIngredients.length < 3) {
-      alert("No hay recetas avanzadas. Prueba quitando el filtro.");
-      return;
-    }
 
     btnGenerateRecipe.classList.add('hidden');
     btnGenerateCustom.classList.add('hidden');
@@ -733,105 +718,131 @@ document.addEventListener('DOMContentLoaded', () => {
     alert("Descargando reporte en PDF... (Simulación)");
   });
 
-  /* ==============================================
+  /* 
      PERFIL Y CONFIG
-     ============================================== */
-  document.getElementById('setting-diet').addEventListener('change', (e) => {
-    currentDiet = e.target.value;
-  });
+  */
+  const elDiet = document.getElementById('setting-diet');
+  if (elDiet) {
+    elDiet.addEventListener('change', (e) => {
+      currentDiet = e.target.value;
+    });
+  }
 
-  document.getElementById('setting-units').addEventListener('change', (e) => {
-    isImperial = (e.target.value === 'Imperial');
-    renderPantry();
-  });
 
-  document.getElementById('setting-lang').addEventListener('change', (e) => {
-    updateLanguage(e.target.value);
-  });
 
-  document.getElementById('toggle-vacation').addEventListener('change', (e) => {
-    const days = document.getElementById('setting-vacation-days').value;
-    const statusTxt = document.getElementById('vacation-status-text');
-    if (e.target.checked && days > 0) {
-      isVacationMode = true;
-      document.getElementById('vacation-days-display').textContent = days;
-      statusTxt.style.display = 'block';
-      alert(`El sistema silenciará las alertas por ${days} días.`);
-    } else {
-      isVacationMode = false;
-      e.target.checked = false;
-      statusTxt.style.display = 'none';
-      alert("Las alertas de vencimiento vuelven a la normalidad instantáneamente.");
-    }
-    renderPantry();
-  });
+  const elUnits = document.getElementById('setting-units');
+  if (elUnits) {
+    elUnits.addEventListener('change', (e) => {
+      isImperial = (e.target.value === 'Imperial');
+      renderPantry();
+    });
+  }
+
+  const elLang = document.getElementById('setting-lang');
+  if (elLang) {
+    elLang.addEventListener('change', (e) => {
+      updateLanguage(e.target.value);
+    });
+  }
+
+  const elVac = document.getElementById('toggle-vacation');
+  if (elVac) {
+    elVac.addEventListener('change', (e) => {
+      const elDays = document.getElementById('setting-vacation-days');
+      const days = elDays ? elDays.value : 0;
+      const statusTxt = document.getElementById('vacation-status-text');
+      if (e.target.checked && days > 0) {
+        isVacationMode = true;
+        const daysDisplay = document.getElementById('vacation-days-display');
+        if (daysDisplay) daysDisplay.textContent = days;
+        if (statusTxt) statusTxt.style.display = 'block';
+        alert(`El sistema silenciará las alertas por ${days} días.`);
+      } else {
+        isVacationMode = false;
+        e.target.checked = false;
+        if (statusTxt) statusTxt.style.display = 'none';
+        alert("Las alertas de vencimiento vuelven a la normalidad instantáneamente.");
+      }
+      renderPantry();
+    });
+  }
 
   // Debug Panels
-  document.getElementById('btn-simulate-cronjob').addEventListener('click', () => {
-    // Determine inactivity
-    const userInactive = false; // we assume active for now, but we can simulate it
-    // For the BDD scenario: 
-    if (userInactive) {
-      notifications.unshift({ type: 'alert', title: 'Recordatorio', text: 'Tu despensa te extraña, ¡actualízala!', time: 'Justo ahora' });
-    } else {
-      if (reportStats.wastedItems === 0) {
-        notifications.unshift({ type: 'history', title: 'Resumen Semanal', text: `¡Gran semana! Salvaste ${Math.floor(reportStats.savedKg * 2)} alimentos.`, time: 'Justo ahora' });
+  const btnOffline = document.getElementById('btn-simulate-offline');
+  if (btnOffline) {
+    btnOffline.addEventListener('click', (e) => {
+      isOffline = !isOffline;
+      if (isOffline) {
+        e.target.textContent = "📶 Sin Conexión (Modo Offline Activado)";
+        alert("Estás sin conexión. Los cambios se guardarán localmente.");
       } else {
-        notifications.unshift({ type: 'alert', title: 'Resumen Semanal', text: `Resumen: Desperdiciaste ${reportStats.wastedItems} alimento(s) esta semana.`, time: 'Justo ahora' });
+        e.target.textContent = "📶 Simular Sin Conexión";
+        alert("Conexión recuperada. Sincronizando preferencias en la nube...");
       }
-    }
-    alert("Notificación de fin de semana disparada. Revisa la campana 🔔");
-    document.getElementById('noti-badge-count').style.display = 'flex';
-    document.getElementById('noti-badge-count').textContent = '!';
-    renderNotifications();
-  });
+    });
+  }
 
-  document.getElementById('btn-simulate-offline').addEventListener('click', (e) => {
-    isOffline = !isOffline;
-    if (isOffline) {
-      e.target.textContent = "📶 Sin Conexión (Modo Offline Activado)";
-      alert("Estás sin conexión. Los cambios se guardarán localmente.");
-    } else {
-      e.target.textContent = "📶 Simular Sin Conexión";
-      alert("Conexión recuperada. Sincronizando preferencias en la nube...");
-    }
-  });
+  const btnSync = document.getElementById('btn-sync-cloud');
+  if (btnSync) {
+    btnSync.addEventListener('click', (e) => {
+      if (isOffline) {
+        alert("No puedes sincronizar estando sin internet.");
+        return;
+      }
+      const btn = e.target;
+      const oldText = btn.textContent;
+      btn.textContent = "Sincronizando...";
+      setTimeout(() => {
+        btn.textContent = "¡Sincronizado!";
+        btn.style.background = "var(--green-main)";
+        btn.style.color = "white";
+        setTimeout(() => btn.textContent = oldText, 2000);
+      }, 1500);
+    });
+  }
 
-  document.getElementById('btn-sync-cloud').addEventListener('click', (e) => {
-    if (isOffline) {
-      alert("No puedes sincronizar estando sin internet.");
-      return;
-    }
-    const btn = e.target;
-    const oldText = btn.textContent;
-    btn.textContent = "Sincronizando...";
-    setTimeout(() => {
-      btn.textContent = "¡Sincronizado!";
-      btn.style.background = "var(--green-main)";
-      btn.style.color = "white";
-      setTimeout(() => btn.textContent = oldText, 2000);
-    }, 1500);
-  });
-
-  document.getElementById('btn-edit-profile').addEventListener('click', () => {
-    openModal(document.getElementById('modal-edit-profile'));
-  });
+  const btnEditProf = document.getElementById('btn-edit-profile');
+  if (btnEditProf) {
+    btnEditProf.addEventListener('click', () => {
+      openModal(document.getElementById('modal-edit-profile'));
+    });
+  }
 
   // Change profile photo logic
   const btnChangePhoto = document.getElementById('btn-change-photo');
   if (btnChangePhoto) {
     btnChangePhoto.addEventListener('click', () => {
-      // Simulate file picker by immediately changing photo to a different random face
+      // Change the profile photo to a fixed public image URL
       const img = document.getElementById('profile-photo-img');
-      img.src = 'https://i.pravatar.cc/150?img=' + Math.floor(Math.random() * 70);
+      img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXcVXXIl_YlYXY7SaeY1grIFTpYbjje1UE9rr6rwBPkQ&s';
       alert('¡Foto de perfil actualizada!');
     });
   }
 
-  document.getElementById('form-edit-profile').addEventListener('submit', (e) => {
-    e.preventDefault();
-    document.getElementById('profile-name-display').textContent = document.getElementById('profile-name').value;
-    closeModal(document.getElementById('modal-edit-profile'));
-  });
+  const formEditProf = document.getElementById('form-edit-profile');
+  if (formEditProf) {
+    formEditProf.addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('profile-name-display').textContent = document.getElementById('profile-name').value;
+      closeModal(document.getElementById('modal-edit-profile'));
+    });
+  }
+
+  // Configuración de filtro de dificultad para sugerencias
+  const filterDifficulty = document.getElementById('filter-difficulty');
+  if (filterDifficulty) {
+    filterDifficulty.addEventListener('change', (e) => {
+      const selectedDiff = e.target.value;
+      const suggestionCards = document.querySelectorAll('.suggestion-card');
+      
+      suggestionCards.forEach(card => {
+        if (selectedDiff === 'all' || card.getAttribute('data-difficulty') === selectedDiff) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
 
 });
