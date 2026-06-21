@@ -63,7 +63,7 @@
             
             <div class="advanced-filters">
               <select id="filter-category" class="filter-select">
-                <option value="all">Todas las categorías</option>
+                <option value="all">Categoría</option>
                 <option value="Frutas/Verduras">Frutas/Verduras</option>
                 <option value="Carnes">Carnes</option>
                 <option value="Lácteos">Lácteos</option>
@@ -71,10 +71,18 @@
                 <option value="Meal Prep">Meal Prep</option>
               </select>
               <select id="filter-status" class="filter-select">
-                <option value="all">Cualquier estado</option>
+                <option value="all">Estado</option>
                 <option value="safe">Fresco (Verde)</option>
                 <option value="warn">Por vencer (Ámbar)</option>
                 <option value="danger">Vencido (Rojo)</option>
+              </select>
+              <select id="filter-color" class="filter-select" style="min-width: 50px;">
+                <option value="all">Ⓜ️</option>
+                <option value="Azul">🔵 Azul</option>
+                <option value="Morado">🟣 Morado</option>
+                <option value="Amarillo">🟡 Amarillo</option>
+                <option value="Blanco">⚪ Blanco</option>
+                <option value="Negro">⚫ Negro</option>
               </select>
             </div>
 
@@ -482,6 +490,8 @@
           <h4>¿Cómo quieres agregar?</h4>
           <button class="action-btn" id="btn-scan-receipt">🧾 Escanear Ticket</button>
           <button class="action-btn" id="btn-scan-barcode">🛒 Escanear Código de Barras</button>
+          <button class="action-btn" id="btn-voice-entry">🎙️ Registrar con tu voz</button>
+          <button class="action-btn" id="btn-photo-entry">📸 Tomar foto</button>
           <button class="action-btn" id="btn-manual-entry">✍️ Registro Manual</button>
         </div>
       </div>
@@ -515,15 +525,28 @@
               <label>Nombre del Producto</label>
               <input type="text" id="food-name" required placeholder="Ej: Pollo">
             </div>
-            <div class="form-group">
-              <label>Categoría</label>
-              <select id="food-category">
-                <option value="Carnes">Carnes</option>
-                <option value="Lácteos">Lácteos</option>
-                <option value="Frutas/Verduras">Frutas/Verduras</option>
-                <option value="Despensa Seca">Despensa Seca</option>
-                <option value="Meal Prep">Meal Prep</option>
-              </select>
+            <div class="form-group" style="display: flex; gap: 10px;">
+              <div style="flex: 1;">
+                <label>Categoría</label>
+                <select id="food-category">
+                  <option value="Carnes">Carnes</option>
+                  <option value="Lácteos">Lácteos</option>
+                  <option value="Frutas/Verduras">Frutas/Verduras</option>
+                  <option value="Despensa Seca">Despensa Seca</option>
+                  <option value="Meal Prep">Meal Prep</option>
+                </select>
+              </div>
+              <div style="flex: 1;">
+                <label>Etiqueta Ⓜ️</label>
+                <select id="food-color">
+                  <option value="">Ninguno</option>
+                  <option value="Azul">🔵 Azul</option>
+                  <option value="Morado">🟣 Morado</option>
+                  <option value="Amarillo">🟡 Amarillo</option>
+                  <option value="Blanco">⚪ Blanco</option>
+                  <option value="Negro">⚫ Negro</option>
+                </select>
+              </div>
             </div>
             <div style="display: flex; gap: 10px;">
               <div class="form-group" style="flex: 1;">
