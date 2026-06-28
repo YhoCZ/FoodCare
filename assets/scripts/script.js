@@ -1,46 +1,50 @@
 /* ============================================
    FOODCARE — Interactive JavaScript
-   IHC Audited — Counters, Reveals, Placeholders
+   Redesigned: Splash Hero Nav Animation + Multi-page
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ---------- Header Scroll Effect ----------
-  const header = document.querySelector('.header');
+  // ---------- Detect if we're on the index (splash) page ----------
+  const splashHero = document.querySelector('.splash-hero');
+  const isIndex = !!splashHero;
 
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
+  if (isIndex) {
+    document.body.classList.add('is-index');
+  }
 
-  // ---------- Mobile Menu Toggle ----------
-  const mobileToggle = document.querySelector('.mobile-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
+  // ---------- Splash Hero → Fixed Header Transition (index only) ----------
+  const siteHeader = document.getElementById('site-header');
+  const splashNav = document.getElementById('splash-nav');
 
-  if (mobileToggle && mobileMenu) {
-    mobileToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-      mobileToggle.classList.toggle('active');
-    });
+  if (isIndex && siteHeader && splashNav) {
+    const handleSplashScroll = () => {
+      // The nav container at the bottom of the hero
+      const splashNavRect = splashNav.getBoundingClientRect();
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        mobileToggle.classList.remove('active');
-      });
-    });
+      // When the splash nav scrolls out of view, show the fixed header
+      if (splashNavRect.top < 0) {
+        siteHeader.classList.add('visible');
+        splashNav.classList.add('hidden');
+      } else {
+        siteHeader.classList.remove('visible');
+        splashNav.classList.remove('hidden');
+      }
+    };
+
+    window.addEventListener('scroll', handleSplashScroll, { passive: true });
+    handleSplashScroll(); // Check initial state
   }
 
   // ---------- Smooth Scroll for Anchor Links ----------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return; // Skip bare # links
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const target = document.querySelector(href);
       if (target) {
-        const headerOffset = 80;
+        const headerOffset = isIndex ? 20 : 80;
         const elementPosition = target.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -117,52 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   allCounters.forEach(counter => counterObserver.observe(counter));
 
-  // ---------- Active Navigation Highlight ----------
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      const sectionHeight = section.offsetHeight;
-      if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
-      }
-    });
-  });
-
-  // ---------- Parallax on Hero Elements ----------
-  const heroVisual = document.querySelector('.hero-visual');
-
-  if (heroVisual && window.innerWidth > 768) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const rate = scrolled * 0.03;
-      heroVisual.style.transform = `translateY(${rate}px)`;
-    });
-  }
-
-  // ---------- Hero H1 Entrance Animation ----------
-  const heroH1 = document.querySelector('.hero h1');
-  if (heroH1) {
-    heroH1.style.opacity = '0';
-    heroH1.style.transform = 'translateY(20px)';
-
-    setTimeout(() => {
-      heroH1.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-      heroH1.style.opacity = '1';
-      heroH1.style.transform = 'translateY(0)';
-    }, 200);
-  }
-
   // ---------- Video Placeholder Hover Effects ----------
   const videoPlaceholders = document.querySelectorAll('.video-placeholder, .team-video-placeholder');
   videoPlaceholders.forEach(placeholder => {
@@ -217,6 +175,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     startCarousel();
+  }
+
+  // ---------- Splash Hero Entrance Animation ----------
+  if (isIndex) {
+    const heroTitle = document.querySelector('.splash-hero__title');
+    const heroSubtitle = document.querySelector('.splash-hero__subtitle');
+    const heroButtons = document.querySelector('.splash-hero__buttons');
+
+    if (heroTitle) {
+      heroTitle.style.opacity = '0';
+      heroTitle.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        heroTitle.style.opacity = '1';
+        heroTitle.style.transform = 'translateY(0)';
+      }, 200);
+    }
   }
 
 });
