@@ -13,43 +13,8 @@
 </head>
 <body>
 
-  <!-- ============================================
-       HEADER — Shared Navigation
-       ============================================ -->
-  <header class="site-header" id="site-header">
-    <div class="container">
-      <nav class="site-nav">
-        <a href="index.html" class="site-nav__brand">
-          <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
-          <span class="site-nav__brand-text">FoodCare</span>
-        </a>
-        <div class="site-nav__links">
-          <a href="como-funciona.html" class="site-nav__link">Cómo funciona</a>
-          <a href="index.html" class="site-nav__plus-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-          </a>
-          <a href="sobre-nosotros.html" class="site-nav__link active">Sobre Nosotros</a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
-        </div>
-        <button class="site-nav__mobile-toggle" id="mobile-toggle" aria-label="Menú">
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ============================================
-       PAGE HERO
-       ============================================ -->
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="page-hero__title">Sobre Nosotros</h1>
-      <p class="page-hero__subtitle">Conoce al equipo detrás de FoodCare y nuestra misión de reducir el desperdicio alimentario.</p>
-    </div>
-  </section>
+  <div id="shared-hero-placeholder"></div>
+  <div id="shared-table-placeholder" data-page="sobre-nosotros"></div>
 
   <!-- ============================================
        PRODUCT VIDEO SECTION
@@ -245,6 +210,7 @@
     </div>
   </footer>
 
+  <script src="assets/scripts/components.js"></script>
   <script src="assets/scripts/script.js"></script>
 </body>
 </html>

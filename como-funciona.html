@@ -11,60 +11,54 @@
 </head>
 <body>
 
-  <!-- ========== HEADER ========== -->
-  <header class="site-header" id="site-header">
-    <div class="container">
-      <nav class="site-nav">
-        <a href="index.html" class="site-nav__brand">
-          <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
-          <span class="site-nav__brand-text">FoodCare</span>
-        </a>
-        <div class="site-nav__links">
-          <a href="como-funciona.html" class="site-nav__link active">Cómo funciona</a>
-          <a href="index.html" class="site-nav__plus-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-              <line x1="12" y1="5" x2="12" y2="19"/>
-              <line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-          </a>
-          <a href="sobre-nosotros.html" class="site-nav__link">Sobre Nosotros</a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
-        </div>
-        <button class="site-nav__mobile-toggle" id="mobile-toggle" aria-label="Menú">
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ========== PAGE HERO ========== -->
-  <section class="page-hero">
-    <div class="container">
-      <h1 class="page-hero__title">¿Cómo funciona FoodCare?</h1>
-      <p class="page-hero__subtitle">Conoce paso a paso cómo nuestra app te ayuda a gestionar tu despensa de forma inteligente.</p>
-    </div>
-  </section>
+  <div id="shared-hero-placeholder"></div>
+  <div id="shared-table-placeholder" data-page="como-funciona"></div>
 
   <!-- ========== PHONE MOCKUP CAROUSEL ========== -->
-  <section class="carousel-showcase section-padding">
+  <section class="carousel-showcase section-padding bg-cyan-textured" id="explora">
     <div class="container">
-      <h2 class="section-title reveal">Explora la app <span class="highlight">por dentro</span></h2>
-      <p class="section-subtitle reveal reveal-delay-1">Desliza entre las pantallas principales de FoodCare.</p>
-      <div class="carousel-showcase__phone">
-        <div class="hero-carousel" id="hero-carousel">
-          <div class="carousel-slides">
-            <img src="assets/images/savora_pantry_mockup.jpg" class="carousel-slide active" alt="Despensa Inteligente">
-            <img src="assets/images/savora_recipes_mockup.jpg" class="carousel-slide" alt="IA Recetas">
-            <img src="assets/images/savora_reports_mockup.jpg" class="carousel-slide" alt="Reportes y Ahorro">
-            <img src="assets/images/savora_profile_mockup.jpg" class="carousel-slide" alt="Perfil">
+      <h2 class="section-title reveal" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Explora la app <span class="highlight" style="color: var(--green-300);">por dentro</span></h2>
+      <p class="section-subtitle reveal reveal-delay-1" style="color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">Descubre las funciones principales de FoodCare.</p>
+      
+      <div class="feature-showcase-grid">
+        
+        <!-- Left Column: Feature Tabs -->
+        <div class="feature-tabs-list">
+          
+          <div class="feature-tab-card active" data-slide="0">
+            <span class="feature-tab-number">1. Alacena</span>
+            <p class="feature-tab-desc">Almacena todos tus alimentos mediante escaneo o voz. Tendrás el control total de qué tienes y cuándo caduca.</p>
           </div>
-          <div class="carousel-dots" id="carousel-dots">
-            <span class="dot active" data-index="0"></span>
-            <span class="dot" data-index="1"></span>
-            <span class="dot" data-index="2"></span>
-            <span class="dot" data-index="3"></span>
+
+          <div class="feature-tab-card" data-slide="1">
+            <span class="feature-tab-number">2. Comprar</span>
+            <p class="feature-tab-desc">Nuestra IA analiza tu inventario actual y tu dieta para generar una lista de compras inteligente y sin excesos.</p>
+          </div>
+
+          <div class="feature-tab-card" data-slide="2">
+            <span class="feature-tab-number">3. Recetas</span>
+            <p class="feature-tab-desc">SmartChef te recomienda platos creativos con lo que ya tienes. Disfruta recetas paso a paso o mediante video.</p>
+          </div>
+
+          <div class="feature-tab-card" data-slide="3">
+            <span class="feature-tab-number">4. Perfil</span>
+            <p class="feature-tab-desc">Configura tus preferencias dietéticas, metas de ahorro y monitorea tu impacto ambiental mensual.</p>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Phone Mockup -->
+        <div class="carousel-showcase__phone feature-phone-wrapper">
+          <div class="hero-carousel" id="hero-carousel">
+            <div class="carousel-slides">
+              <img src="assets/images/savora_pantry_mockup.jpg" class="carousel-slide active" alt="Despensa Inteligente">
+              <img src="assets/images/savora_reports_mockup.jpg" class="carousel-slide" alt="Comprar">
+              <img src="assets/images/savora_recipes_mockup.jpg" class="carousel-slide" alt="IA Recetas">
+              <img src="assets/images/savora_profile_mockup.jpg" class="carousel-slide" alt="Perfil">
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -232,6 +226,7 @@
     </div>
   </footer>
 
+  <script src="assets/scripts/components.js"></script>
   <script src="assets/scripts/script.js"></script>
 </body>
 </html>
