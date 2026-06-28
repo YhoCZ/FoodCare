@@ -18,21 +18,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const splashNav = document.getElementById('splash-nav');
 
   if (isIndex && siteHeader && splashNav) {
-    const handleSplashScroll = () => {
-      // The nav container at the bottom of the hero
-      const splashNavRect = splashNav.getBoundingClientRect();
+    let ticking = false;
 
-      // When the splash nav scrolls out of view, show the fixed header
-      if (splashNavRect.top < 0) {
+    const handleSplashScroll = () => {
+      const splashNavRect = splashNav.getBoundingClientRect();
+      const navTop = splashNavRect.top;
+      const navHeight = splashNavRect.height;
+      
+      const isAtTop = navTop <= 16;
+
+      // When nav scrolls out of view (hits the top), show fixed header and hide splash nav
+      if (isAtTop) {
         siteHeader.classList.add('visible');
         splashNav.classList.add('hidden');
       } else {
         siteHeader.classList.remove('visible');
         splashNav.classList.remove('hidden');
       }
+      
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleSplashScroll, { passive: true });
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(handleSplashScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     handleSplashScroll(); // Check initial state
   }
 

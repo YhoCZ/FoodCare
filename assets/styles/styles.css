@@ -286,17 +286,24 @@ h1, h2, h3, h4, h5, h6 {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
-  max-width: 720px;
+  width: max-content;
+  max-width: 95%;
   z-index: 1000;
   background: rgba(255,255,255,0.94);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius-full);
   box-shadow: 0 4px 32px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
-  padding: 8px 28px;
+  padding: 8px 16px;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
+
+/* Ensure the floating header items are compact */
+.site-header .site-nav__brand-text { font-size: 1.2rem; }
+.site-header .site-nav__logo-img { width: 24px; height: 24px; }
+.site-header .site-nav__link--cta { padding: 8px 16px; font-size: 0.85rem; }
+.site-header .site-nav__plus-icon { width: 32px; height: 32px; top: auto; left: auto; position: static; transform: none; box-shadow: none; margin: 0; }
+.site-header .site-nav__plus-icon svg { width: 16px; height: 16px; }
 
 /* On index.html, the header is hidden until scroll */
 body.is-index .site-header {
@@ -317,7 +324,7 @@ body.is-index .site-header.visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2xl);
+  gap: var(--space-xl);
   height: 100%;
   position: relative;
 }
@@ -484,25 +491,25 @@ body.is-index .site-header.visible {
 
 .splash-hero__title-text {
   font-family: var(--font-handwritten);
-  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-size: clamp(4.5rem, 10vw, 7rem);
   font-weight: 700;
   color: var(--green-900);
   line-height: 1;
 }
 
 .splash-hero__title-icon {
-  width: clamp(60px, 10vw, 90px);
-  height: clamp(60px, 10vw, 90px);
+  width: clamp(75px, 12vw, 110px);
+  height: clamp(75px, 12vw, 110px);
   object-fit: contain;
 }
 
 .splash-hero__subtitle {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
   color: var(--green-900);
   opacity: 0.8;
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: var(--space-2xl);
-  max-width: 420px;
+  max-width: 600px;
 }
 
 .splash-hero__buttons {
@@ -559,26 +566,28 @@ body.is-index .site-header.visible {
   flex-shrink: 0;
   align-self: flex-end;
   animation: fadeInRight 0.8s ease-out 0.4s both;
+  z-index: 2;
 }
 
 /* Glow effect behind the phone */
 .splash-hero__phone::before {
   content: '';
   position: absolute;
-  top: 15%;
-  right: -10%;
-  width: 80%;
-  height: 70%;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.20) 35%, transparent 70%);
-  filter: blur(30px);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.3) 40%, transparent 70%);
+  filter: blur(40px);
   z-index: -1;
   pointer-events: none;
   animation: glowPulse 4s ease-in-out infinite alternate;
 }
 
 @keyframes glowPulse {
-  0%   { opacity: 0.6; transform: scale(1); }
-  100% { opacity: 1;   transform: scale(1.08); }
+  0%   { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
 }
 
 .splash-hero__phone-img {
@@ -588,47 +597,85 @@ body.is-index .site-header.visible {
   display: block;
 }
 
-/* Nav container at bottom of hero — full viewport width */
+/* Nav container at bottom of hero — HUGE white area */
 .splash-hero__nav-container {
   position: relative;
   z-index: 10;
   padding: 0;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to top, rgba(220,230,210,0.95) 0%, rgba(220,230,210,0.6) 40%, transparent 100%);
-  transition: opacity 0.4s ease;
+  align-items: center;
+  background: transparent;
+  height: 20vh;
+  min-height: 150px;
+  will-change: transform, opacity;
+}
+
+.splash-hero__nav-container::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -10px; right: -10px; bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path fill="%23f3f4ee" d="M-10,120 V80 H500 C600,80 620,0 720,0 C820,0 840,80 940,80 H1450 V120 Z" /></svg>');
+  background-size: 100% 100%;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
 .splash-hero__nav-container .site-nav {
-  background: rgba(245,243,237,0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #f3f4ee;
   border-radius: 0;
-  padding: 14px 48px;
+  padding: 0 40px;
   box-shadow: none;
-  gap: var(--space-2xl);
+  gap: 50px;
   max-width: none;
   width: 100%;
+  height: 100%;
   justify-content: center;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  align-items: center;
   position: relative;
 }
 
-/* Larger floating '+' button in the splash nav */
+/* Enormous elements for the splash nav */
+.splash-hero__nav-container .site-nav__links > a:first-child {
+  margin-right: 120px; /* Space for the centered + button */
+}
+.splash-hero__nav-container .site-nav__link {
+  font-size: 1.4rem;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__link--cta {
+  font-size: 1.3rem;
+  padding: 16px 36px;
+}
+.splash-hero__nav-container .site-nav__brand-text {
+  font-size: 2rem;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__logo-img {
+  width: 48px;
+  height: 48px;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Enormous floating '+' button in the splash nav */
 .splash-hero__nav-container .site-nav__plus-icon {
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   position: absolute;
-  top: -30px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__plus-icon svg {
+  width: 44px;
+  height: 44px;
+  stroke-width: 3;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.splash-hero__nav-container .site-nav__plus-icon svg {
-  width: 26px;
-  height: 26px;
-}
 
 /* Hide splash nav when header takes over */
 .splash-hero__nav-container.hidden {
