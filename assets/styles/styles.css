@@ -6,6 +6,20 @@
 /* ---------- Google Fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap');
 
+@font-face {
+  font-family: 'Majestic Valentine';
+  src: url('../fonts/Majestic Valentine.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Margareth Signature';
+  src: url('../fonts/Margareth Signature.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ---------- CSS Custom Properties ---------- */
 :root {
   /* Primary Greens — Action Green per IHC spec */
@@ -450,6 +464,14 @@ body.is-index .site-header.visible {
   background: var(--gray-700);
   border-radius: 2px;
   transition: all var(--transition-base);
+}
+
+/* Global Navigation display states */
+.mobile-only {
+  display: none !important;
+}
+.desktop-only {
+  display: inline !important;
 }
 
 /* ============================================
@@ -1895,88 +1917,192 @@ body.is-index .site-header.visible {
 }
 
 /* ============================================
-   TESTIMONIALS — 3-column F-Pattern
+   TESTIMONIALS — Interactive Envelope
    ============================================ */
 .testimonials {
   background: var(--bg-secondary);
   padding: var(--space-4xl) 0;
+  overflow: hidden;
 }
 
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--grid-gap);
-}
-
-.testimonial-card {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
-  border: 1px solid var(--gray-200);
-  transition: all var(--transition-base);
+.envelope-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 380px;
+  margin: 150px auto 50px auto;
+  perspective: 1000px;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: #e8d0a9; /* Envelope color */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  margin-top: 40px;
+  transform-style: preserve-3d;
 }
 
-.testimonial-quote {
-  font-size: 2rem;
-  color: var(--green-200);
-  font-family: serif;
-  line-height: 1;
-  margin-bottom: var(--space-md);
+.envelope-back {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #d4b585;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: inset 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.testimonial-text {
-  font-size: 0.95rem;
-  line-height: 1.8;
-  color: var(--text-primary);
-  margin-bottom: var(--space-xl);
-  font-style: italic;
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e8d0a9;
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 4;
+  /* Add subtle shadow line to flap */
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.1));
 }
 
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
+/* Open state for the flap */
+.envelope-wrapper.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1; /* Move behind notes when open */
 }
 
-.testimonial-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--white);
+.envelope-front {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #e1c699;
+  clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  z-index: 3;
 }
 
-.testimonial-card:nth-child(1) .testimonial-avatar { background: var(--segment-blue); }
-.testimonial-card:nth-child(2) .testimonial-avatar { background: var(--segment-green); }
-.testimonial-card:nth-child(3) .testimonial-avatar { background: var(--segment-purple); }
-
-.testimonial-name {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--text-heading);
+/* Subtle line to distinguish envelope front flaps */
+.envelope-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.02) 50%, rgba(255,255,255,0.05) 50%);
+  clip-path: polygon(0 100%, 50% 45%, 100% 100%);
 }
 
-.testimonial-role {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+.envelope-notes {
+  position: absolute;
+  top: 15px;
+  left: 5%;
+  width: 90%;
+  height: 240px;
+  z-index: 2;
+  transition: z-index 0.3s ease;
 }
 
-.testimonial-stars {
-  color: var(--amber-400);
-  font-size: 0.9rem;
-  margin-bottom: var(--space-md);
-  letter-spacing: 2px;
+.envelope-wrapper.open .envelope-notes {
+  z-index: 4; /* Brings the entire stack in front of envelope-front */
 }
+
+.paper-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffdf5;
+  padding: 35px 25px 25px 25px;
+  border-radius: 4px;
+  /* Simulating stacked papers for volume */
+  box-shadow: 
+    0 2px 5px rgba(0,0,0,0.1),
+    -3px 4px 0px #fffdf5,
+    -3px 4px 5px rgba(0,0,0,0.1),
+    -6px 8px 0px #fffdf5,
+    -6px 8px 5px rgba(0,0,0,0.08);
+  border: 1px solid #f0e6d2;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+  transform-origin: bottom center;
+  cursor: pointer;
+  user-select: none;
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #e6decb 28px);
+  background-position: 0 5px;
+}
+
+.paper-note::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+  pointer-events: none;
+}
+
+.paper-note .testimonial-text {
+  font-family: 'Margareth Signature', cursive, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.35;
+  color: #2c2c2c;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.paper-note .testimonial-name {
+  font-family: 'Majestic Valentine', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: var(--green-800);
+  text-align: right;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+
+/* Note Stack Positioning - Default (Closed) */
+.paper-note {
+  transform: translateY(20px) scale(0.9);
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Note Stack Positioning - Opened (Row Layout) */
+.envelope-wrapper.open .paper-note[data-pos="center"] {
+  transform: translateY(-160px) rotate(0deg);
+  z-index: 5;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="left"] {
+  transform: translate(-105%, -130px) rotate(-3deg);
+  z-index: 4;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="right"] {
+  transform: translate(105%, -130px) rotate(3deg);
+  z-index: 4;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="hidden"] {
+  transform: translateY(20px) scale(0.8);
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Animation class when clicked/pulled out */
+.paper-note.pull-out {
+  transform: translateY(-350px) scale(1.05) !important;
+  opacity: 0 !important;
+  z-index: 6 !important;
+}
+
 
 /* ============================================
    TEAM SECTION
@@ -2401,6 +2527,11 @@ body.is-index .site-header.visible {
     align-items: center;
   }
 
+  .site-nav__link--cta {
+    padding: 6px 12px !important;
+    font-size: 0.8rem !important;
+  }
+
   .site-nav__mobile-toggle {
     display: none !important;
   }
@@ -2455,7 +2586,6 @@ body.is-index .site-header.visible {
   .audience-grid,
   .impact-grid,
   .plans-grid,
-  .testimonials-grid,
   .team-grid {
     display: flex !important;
     flex-wrap: nowrap !important;
@@ -2473,7 +2603,6 @@ body.is-index .site-header.visible {
   .audience-grid > div,
   .impact-grid > div,
   .plans-grid > div,
-  .testimonials-grid > div,
   .team-grid > div {
     flex: 0 0 85% !important;
     max-width: 85% !important;
@@ -2498,6 +2627,41 @@ body.is-index .site-header.visible {
   .que-hacemos__card {
     margin: 0 var(--space-md);
     padding: var(--space-2xl) var(--space-lg);
+  }
+
+  /* Responsive tweaks for envelope */
+  .envelope-wrapper {
+    max-width: 320px;
+    height: 330px;
+  }
+  
+  .envelope {
+    height: 220px;
+  }
+  
+  .envelope-notes {
+    height: 200px;
+  }
+  
+  .paper-note {
+    padding: 25px 20px 20px 20px;
+  }
+  
+  .paper-note .testimonial-text {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+  
+  .paper-note .testimonial-name {
+    font-size: 1.8rem;
+  }
+  
+  /* Mobile Row Override: Only center shows */
+  .envelope-wrapper.open .paper-note[data-pos="left"],
+  .envelope-wrapper.open .paper-note[data-pos="right"] {
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+    z-index: 1;
   }
 }
 
@@ -2648,11 +2812,4 @@ body.is-index .site-header.visible {
   width: 100%;
 }
 
-/* Global Navigation display states */
-.mobile-only {
-  display: none !important;
-}
-.desktop-only {
-  display: inline !important;
-}
 

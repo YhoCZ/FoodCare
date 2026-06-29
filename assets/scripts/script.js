@@ -208,4 +208,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // ---------- Envelope Testimonials Logic (Row Layout) ----------
+  const envelopeWrapper = document.getElementById('envelope-wrapper');
+  if (envelopeWrapper) {
+    const notesContainer = envelopeWrapper.querySelector('.envelope-notes');
+    let allNotes = Array.from(envelopeWrapper.querySelectorAll('.paper-note'));
+    
+    // Maintain 3 visible slots and a queue for hidden notes
+    let slots = [null, null, null]; // [left, center, right]
+    let queue = [];
+
+    // Initialize: assign first 3 notes to slots, rest to queue
+    allNotes.forEach((note, idx) => {
+      if (idx < 3) {
+        slots[idx] = note;
+      } else {
+        queue.push(note);
+      }
+    });
+
+    const updateDOMStates = () => {
+      allNotes.forEach(note => note.setAttribute('data-pos', 'hidden'));
+      
+      if (slots[0]) slots[0].setAttribute('data-pos', 'left');
+      if (slots[1]) slots[1].setAttribute('data-pos', 'center');
+      if (slots[2]) slots[2].setAttribute('data-pos', 'right');
+    };
+
+    // Open envelope automatically when scrolled into view (requires more scrolling now)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Small delay so user sees it closed first
+            setTimeout(() => {
+              envelopeWrapper.classList.add('open');
+            }, 200);
+          }
+        });
+      }, { threshold: 0.6 });
+      observer.observe(envelopeWrapper);
+    } else {
+      envelopeWrapper.classList.add('open');
+    }
+
+    updateDOMStates();
+
+    notesContainer.addEventListener('click', (e) => {
+      const clickedNote = e.target.closest('.paper-note');
+      if (!clickedNote) return;
+
+      const pos = clickedNote.getAttribute('data-pos');
+      if (pos === 'hidden') return;
+
+      let slotIndex = -1;
+      if (pos === 'left') slotIndex = 0;
+      if (pos === 'center') slotIndex = 1;
+      if (pos === 'right') slotIndex = 2;
+
+      if (slotIndex === -1) return;
+
+      // Animate out
+      clickedNote.classList.add('pull-out');
+      
+      setTimeout(() => {
+        clickedNote.classList.remove('pull-out');
+        
+        // Remove from slot, add to end of queue
+        queue.push(clickedNote);
+        
+        // Take first from queue and put in slot
+        const newNote = queue.shift();
+        slots[slotIndex] = newNote;
+        
+        notesContainer.prepend(clickedNote);
+        updateDOMStates();
+      }, 500);
+    });
+  }
+
 });
