@@ -1,0 +1,77 @@
+/* Add noise texture to paper card */
+.que-hacemos__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+.que-hacemos__card > * { position: relative; z-index: 1; }
+
+.que-hacemos__tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 120px;
+  height: 36px;
+  background: #c4a882;
+  opacity: 0.85;
+  border-radius: 2px;
+  z-index: 5;
+}
+
+.que-hacemos__title {
+  font-family: var(--font-handwritten);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--green-900);
+  margin-bottom: var(--space-lg);
+  line-height: 1.1;
+}
+
+.que-hacemos__text {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--gray-700);
+  line-height: 1.7;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.que-hacemos__bg-teal {
+  background: #2a6367;
+  height: 200px;
+  margin-top: -60px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.que-hacemos__bg-teal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: -1;
+}
+
+.que-hacemos__leg {
+  position: absolute;
+  top: -24px; /* start exactly behind the table's wooden edge */
+  width: 48px;
+  height: 224px; /* extends all the way down through the teal bg */
+  background: linear-gradient(90deg, #3d2310 0%, #4a2c16 30%, #29170a 100%);
+  box-shadow: 8px 0 15px rgba(0,0,0,0.45);
+  z-index: 10;
+}
+.que-hacemos__leg--left {
+  left: 12%;
+}
+.que-hacemos__leg--right {
+  right: 12%;
+}
+

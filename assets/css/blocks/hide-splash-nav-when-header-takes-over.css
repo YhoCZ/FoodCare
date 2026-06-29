@@ -1,0 +1,6 @@
+/* Hide splash nav when header takes over */
+.splash-hero__nav-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+

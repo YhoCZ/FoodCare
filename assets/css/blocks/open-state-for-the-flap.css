@@ -1,0 +1,16 @@
+/* Open state for the flap */
+.envelope-wrapper.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1; /* Move behind notes when open */
+}
+
+.envelope-front {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: #e1c699;
+  clip-path: polygon(0 0, 50% 45%, 100% 0, 100% 100%, 0 100%);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  z-index: 3;
+}
+

@@ -1,0 +1,71 @@
+/* Natural rotation to simulate hand-placement */
+.audience-card:nth-child(1) { transform: rotate(-1.5deg); }
+.audience-card:nth-child(2) { transform: rotate(1.2deg); }
+.audience-card:nth-child(3) { transform: rotate(-1deg); }
+
+.audience-card:nth-child(1)::before { transform: translateX(-50%) rotate(-3deg); }
+.audience-card:nth-child(2)::before { transform: translateX(-50%) rotate(4deg); }
+.audience-card:nth-child(3)::before { transform: translateX(-50%) rotate(-1deg); }
+
+.audience-card:hover {
+  transform: translateY(-12px) scale(1.02) rotate(0deg) !important;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25) !important;
+  z-index: 5;
+}
+
+.audience-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.audience-card:hover .audience-img {
+  transform: scale(1.05);
+}
+
+.audience-img-wrapper {
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.audience-tag {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  background: var(--white);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-md);
+}
+
+.segment-blue .audience-tag { color: var(--segment-blue); }
+.segment-green .audience-tag { color: var(--segment-green); }
+.segment-purple .audience-tag { color: var(--segment-purple); }
+
+.audience-body {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.audience-body h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.segment-blue .audience-body h3 { color: var(--segment-blue); }
+.segment-green .audience-body h3 { color: var(--segment-green); }
+.segment-purple .audience-body h3 { color: var(--segment-purple); }
+
+.audience-body p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+

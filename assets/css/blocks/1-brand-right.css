@@ -1,0 +1,6 @@
+/* 1. Brand (Right-aligned in first column) */
+.splash-hero__nav-container .site-nav__brand {
+  grid-column: 1;
+  justify-self: end;
+}
+

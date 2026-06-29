@@ -1,0 +1,21 @@
+/* Enormous floating '+' button in the splash nav */
+.splash-hero__nav-container .site-nav__plus-icon {
+  width: clamp(50px, 8vw, 90px);
+  height: clamp(50px, 8vw, 90px);
+  position: absolute;
+  top: clamp(-25px, -4vw, -45px);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__plus-icon svg {
+  width: 44px;
+  height: 44px;
+  stroke-width: 3;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+

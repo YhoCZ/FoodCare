@@ -1,0 +1,6 @@
+/* 2. Cómo funciona (Right-aligned in second column) */
+.splash-hero__nav-container .site-nav__links > a:nth-child(1) {
+  grid-column: 2;
+  justify-self: end;
+}
+

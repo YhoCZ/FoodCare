@@ -1,0 +1,23 @@
+/* Floating animation on hover */
+.que-hacemos__bg-cream:hover .table-item--taper-1 { transform: rotate(-8deg) translateY(-5px) scale(1.05); }
+.que-hacemos__bg-cream:hover .table-item--tomato { transform: rotate(12deg) translateY(-4px) scale(1.05); }
+.que-hacemos__bg-cream:hover .table-item--avocado { transform: rotate(-18deg) translateY(-6px) scale(1.05); }
+.que-hacemos__bg-cream:hover .table-item--carrot { transform: rotate(32deg) translateY(-5px) scale(1.05); }
+.que-hacemos__bg-cream:hover .table-item--taper-2 { transform: rotate(-4deg) translateY(-4px) scale(1.05); }
+.que-hacemos__bg-cream:hover .table-item--lettuce { transform: rotate(22deg) translateY(-5px) scale(1.05); }
+
+.que-hacemos__card {
+  max-width: 560px;
+  margin: 0 auto;
+  background: #e8d5c4;
+  padding: var(--space-3xl) var(--space-2xl);
+  position: relative;
+  text-align: center;
+  /* Torn paper effect via clip-path */
+  clip-path: polygon(
+    0% 2%, 3% 0%, 8% 3%, 12% 1%, 18% 2%, 22% 0%, 28% 3%, 35% 1%, 40% 2%, 45% 0%, 52% 3%, 58% 1%, 63% 2%, 68% 0%, 73% 3%, 78% 1%, 83% 2%, 88% 0%, 93% 3%, 97% 1%, 100% 2%,
+    100% 97%, 97% 100%, 93% 97%, 88% 100%, 83% 97%, 78% 100%, 73% 97%, 68% 100%, 63% 97%, 58% 100%, 52% 97%, 45% 100%, 40% 97%, 35% 100%, 28% 97%, 22% 100%, 18% 97%, 12% 100%, 8% 97%, 3% 100%, 0% 97%
+  );
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+

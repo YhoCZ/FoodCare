@@ -1,0 +1,23 @@
+/* 4. Probar Demo CTA (Left-aligned in fourth column) */
+.splash-hero__nav-container .site-nav__links > a:nth-child(4) {
+  grid-column: 4;
+  justify-self: start;
+}
+.splash-hero__nav-container .site-nav__link {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__link--cta {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  padding: clamp(8px, 1.5vw, 16px) clamp(16px, 3vw, 36px);
+}
+.splash-hero__nav-container .site-nav__brand-text {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.splash-hero__nav-container .site-nav__logo-img {
+  width: clamp(32px, 5vw, 48px);
+  height: auto;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+

@@ -1,0 +1,68 @@
+/* SPLASH HERO — Full-screen landing (index only) */
+.splash-hero {
+  position: relative;
+  min-height: 100vh;
+  background: #c5e1a5;
+  background: url('../../img/hero/bg.jpg') center/cover no-repeat, linear-gradient(170deg, #d4e9bc 0%, #c5e1a5 40%, #b5d99c 100%);
+  background-blend-mode: multiply; /* Tint the image green */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.splash-hero__content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-xl) 0;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.splash-hero__text {
+  max-width: 520px;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.splash-hero__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.splash-hero__title-text {
+  font-family: var(--font-handwritten);
+  font-size: clamp(4.5rem, 10vw, 7rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  line-height: 1;
+}
+
+.splash-hero__title-icon {
+  width: clamp(75px, 12vw, 110px);
+  height: clamp(75px, 12vw, 110px);
+  object-fit: contain;
+}
+
+.splash-hero__subtitle {
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0.95;
+  line-height: 1.5;
+  margin-bottom: var(--space-2xl);
+  max-width: 600px;
+}
+
+.splash-hero__buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+

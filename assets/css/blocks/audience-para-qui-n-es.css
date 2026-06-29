@@ -1,0 +1,42 @@
+/* AUDIENCE / PARA QUIÉN ES — 3x 4-col Cards */
+.audience {
+  padding: var(--space-4xl) 0;
+  background: #fdfdfc;
+  background-image: url('../../assets/images/crumpled_newspaper_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+}
+
+.audience .section-subtitle {
+  background: #faf6eb;
+  color: #3b3028 !important;
+  padding: 12px 28px;
+  display: inline-block;
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: rotate(-0.5deg);
+  font-weight: 500;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  border-left: 4px solid var(--brand-primary);
+  line-height: 1.5;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+  padding-top: var(--space-md);
+}
+
+.audience-card {
+  background: #faf6eb; /* cream note paper color */
+  padding: 14px 14px 24px 14px; /* Polaroid snapshot frame padding */
+  border-radius: 2px;
+  position: relative;
+  transition: all var(--transition-base);
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.16);
+}
+

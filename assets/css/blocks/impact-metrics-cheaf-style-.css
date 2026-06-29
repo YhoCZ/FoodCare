@@ -1,0 +1,77 @@
+/* IMPACT METRICS (CHEAF STYLE) */
+.impact-metrics-cheaf {
+  background-color: #f3f4ee;
+  padding: var(--space-4xl) 0;
+}
+
+.impact-hero-img-wrapper {
+  margin-bottom: var(--space-2xl);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.impact-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.impact-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.impact-card-cheaf {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.impact-card-cheaf::before {
+  content: '';
+  position: absolute;
+  top: 16px; left: 16px; right: 16px; bottom: 16px;
+  border-radius: var(--radius-md);
+  background-image: radial-gradient(#d4dedb 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  background-position: center;
+  z-index: -1;
+}
+
+.impact-card-cheaf .impact-number {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 3.2rem);
+  font-weight: 900;
+  color: #123036; /* Dark teal */
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+
+.impact-card-cheaf .impact-unit {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #123036;
+  margin-bottom: var(--space-sm);
+}
+
+.impact-card-cheaf p {
+  font-size: 0.95rem;
+  color: #3b504e;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .impact-cards-container {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+

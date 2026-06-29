@@ -1,0 +1,17 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Majestic Valentine';
+  src: url('../../fonts/Majestic Valentine.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Margareth Signature';
+  src: url('../../fonts/Margareth Signature.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
