@@ -39,18 +39,18 @@ const HERO_HTML = `
       <nav class="site-nav" id="site-nav-inner">
         <a href="index.html" class="site-nav__brand">
           <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
-          <span class="site-nav__brand-text">FoodCare</span>
+          <span class="site-nav__brand-text desktop-only">FoodCare</span>
         </a>
         <div class="site-nav__links">
-          <a href="como-funciona.html" class="site-nav__link">Cómo funciona</a>
+          <a href="como-funciona.html" class="site-nav__link"><span class="desktop-only">Cómo funciona</span><span class="mobile-only nav-two-lines">Cómo<br>funciona</span></a>
           <a href="index.html" class="site-nav__plus-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <line x1="12" y1="5" x2="12" y2="19"/>
               <line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
           </a>
-          <a href="sobre-nosotros.html" class="site-nav__link">Sobre Nosotros</a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
+          <a href="sobre-nosotros.html" class="site-nav__link"><span class="desktop-only">Sobre Nosotros</span><span class="mobile-only nav-two-lines">Sobre<br>nosotros</span></a>
+          <a href="demo.html" class="site-nav__link site-nav__link--cta"><span class="desktop-only">Probar Demo</span><span class="mobile-only">Demo</span></a>
         </div>
         <button class="site-nav__mobile-toggle" id="mobile-toggle" aria-label="Menú">
           <span></span><span></span><span></span>
@@ -65,18 +65,18 @@ const HERO_HTML = `
       <nav class="site-nav">
         <a href="index.html" class="site-nav__brand">
           <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
-          <span class="site-nav__brand-text">FoodCare</span>
+          <span class="site-nav__brand-text desktop-only">FoodCare</span>
         </a>
         <div class="site-nav__links">
-          <a href="como-funciona.html" class="site-nav__link">Cómo funciona</a>
+          <a href="como-funciona.html" class="site-nav__link"><span class="desktop-only">Cómo funciona</span><span class="mobile-only nav-two-lines">Cómo<br>funciona</span></a>
           <a href="index.html" class="site-nav__plus-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <line x1="12" y1="5" x2="12" y2="19"/>
               <line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
           </a>
-          <a href="sobre-nosotros.html" class="site-nav__link">Sobre Nosotros</a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
+          <a href="sobre-nosotros.html" class="site-nav__link"><span class="desktop-only">Sobre Nosotros</span><span class="mobile-only nav-two-lines">Sobre<br>nosotros</span></a>
+          <a href="demo.html" class="site-nav__link site-nav__link--cta"><span class="desktop-only">Probar Demo</span><span class="mobile-only">Demo</span></a>
         </div>
         <button class="site-nav__mobile-toggle" id="mobile-toggle-header" aria-label="Menú">
           <span></span><span></span><span></span>
