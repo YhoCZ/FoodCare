@@ -39,6 +39,7 @@ const HERO_HTML = `
       <nav class="site-nav" id="site-nav-inner">
         <a href="index.html" class="site-nav__brand">
           <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
+          <span class="site-nav__brand-text desktop-only">FoodCare</span>
         </a>
         <div class="site-nav__links">
           <a href="como-funciona.html" class="site-nav__link"><span class="desktop-only">Cómo funciona</span><span class="mobile-only nav-two-lines">Cómo<br>funciona</span></a>
@@ -49,7 +50,7 @@ const HERO_HTML = `
             </svg>
           </a>
           <a href="sobre-nosotros.html" class="site-nav__link"><span class="desktop-only">Sobre Nosotros</span><span class="mobile-only nav-two-lines">Sobre<br>nosotros</span></a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Demo</a>
+          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
         </div>
         <button class="site-nav__mobile-toggle" id="mobile-toggle" aria-label="Menú">
           <span></span><span></span><span></span>
@@ -64,6 +65,7 @@ const HERO_HTML = `
       <nav class="site-nav">
         <a href="index.html" class="site-nav__brand">
           <img src="favicon.ico" alt="FoodCare" class="site-nav__logo-img">
+          <span class="site-nav__brand-text desktop-only">FoodCare</span>
         </a>
         <div class="site-nav__links">
           <a href="como-funciona.html" class="site-nav__link"><span class="desktop-only">Cómo funciona</span><span class="mobile-only nav-two-lines">Cómo<br>funciona</span></a>
@@ -74,7 +76,7 @@ const HERO_HTML = `
             </svg>
           </a>
           <a href="sobre-nosotros.html" class="site-nav__link"><span class="desktop-only">Sobre Nosotros</span><span class="mobile-only nav-two-lines">Sobre<br>nosotros</span></a>
-          <a href="demo.html" class="site-nav__link site-nav__link--cta">Demo</a>
+          <a href="demo.html" class="site-nav__link site-nav__link--cta">Probar Demo</a>
         </div>
         <button class="site-nav__mobile-toggle" id="mobile-toggle-header" aria-label="Menú">
           <span></span><span></span><span></span>
