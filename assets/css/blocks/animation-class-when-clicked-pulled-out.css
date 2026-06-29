@@ -1,0 +1,8 @@
+/* Animation class when clicked/pulled out */
+.paper-note.pull-out {
+  transform: translateY(-350px) scale(1.05) !important;
+  opacity: 0 !important;
+  z-index: 6 !important;
+}
+
+

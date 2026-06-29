@@ -1,0 +1,8 @@
+/* Global Navigation display states */
+.mobile-only {
+  display: none !important;
+}
+.desktop-only {
+  display: inline !important;
+}
+

@@ -1,0 +1,9 @@
+/* Phone mockup in hero */
+.splash-hero__phone {
+  position: relative;
+  flex-shrink: 0;
+  align-self: flex-end;
+  animation: fadeInRight 0.8s ease-out 0.4s both;
+  z-index: 2;
+}
+

@@ -7,10 +7,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>FoodCare — Demo Interactiva</title>
-  <link rel="stylesheet" href="assets/styles/demo.css">
+  <link rel="stylesheet" href="assets/css/demo.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="icon" type="image/png" href="assets/images/foodcare_logo.png">
+  <link rel="icon" type="image/png" href="assets/img/brand/logo.png">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
       <!-- HEADER APP -->
       <header class="app-header">
         <div class="app-logo">
-          <img src="assets/images/foodcare_logo.png" alt="Logo">
+          <img src="assets/img/brand/logo.png" alt="Logo">
           <h2>FoodCare</h2>
         </div>
         <button id="btn-notifications" class="btn-icon" aria-label="Notificaciones">
@@ -350,11 +350,13 @@
       <!-- BOTTOM NAVIGATION (CON FAB INTEGRADO) -->
       <nav class="bottom-nav">
         <a href="#" class="nav-item active" data-target="view-despensa">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <path d="M5 10h14"></path>
+            <path d="M9 14v2"></path>
+            <path d="M9 6v2"></path>
           </svg>
-          <span>Despensa</span>
+          <span>Cocina</span>
         </a>
         <a href="#" class="nav-item" data-target="view-recetas">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -675,6 +677,6 @@
     </div>
   </div>
 
-  <script src="assets/scripts/demo.js"></script>
+  <script src="assets/js/demo.js"></script>
 </body>
 </html>

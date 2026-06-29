@@ -1,0 +1,32 @@
+/* Note Stack Positioning - Default (Closed) */
+.paper-note {
+  transform: translateY(20px) scale(0.9);
+  z-index: 1;
+  opacity: 0;
+}
+
+/* Note Stack Positioning - Opened (Row Layout) */
+.envelope-wrapper.open .paper-note[data-pos="center"] {
+  transform: translateY(-160px) rotate(0deg);
+  z-index: 5;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="left"] {
+  transform: translate(-105%, -130px) rotate(-3deg);
+  z-index: 4;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="right"] {
+  transform: translate(105%, -130px) rotate(3deg);
+  z-index: 4;
+  opacity: 1;
+}
+
+.envelope-wrapper.open .paper-note[data-pos="hidden"] {
+  transform: translateY(20px) scale(0.8);
+  z-index: 1;
+  opacity: 0;
+}
+

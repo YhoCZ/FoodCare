@@ -1,0 +1,17 @@
+/* Semaforo visual */
+.semaforo {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.semaforo-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.semaforo-dot.green { background: var(--green-400); }
+.semaforo-dot.amber { background: var(--amber-400); }
+.semaforo-dot.red { background: var(--red-400); }
+

@@ -1,0 +1,18 @@
+/* Translucent masking tape holding each clipping */
+.audience-card::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 90px;
+  height: 28px;
+  background: rgba(240, 222, 192, 0.7); /* translucent tape */
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  z-index: 10;
+  border-left: 1px dashed rgba(0,0,0,0.1);
+  border-right: 1px dashed rgba(0,0,0,0.1);
+}
+

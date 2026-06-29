@@ -1,0 +1,6 @@
+/* 3. Sobre Nosotros (Left-aligned in third column) */
+.splash-hero__nav-container .site-nav__links > a:nth-child(3) {
+  grid-column: 3;
+  justify-self: start;
+}
+
