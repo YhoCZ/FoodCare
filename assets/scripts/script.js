@@ -153,17 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- Hero Carousel Logic ----------
   const carouselSlides = document.querySelectorAll('.carousel-slide');
-  const carouselDots = document.querySelectorAll('.dot');
-  if (carouselSlides.length > 0 && carouselDots.length > 0) {
+  const featureTabs = document.querySelectorAll('.feature-tab-card');
+  if (carouselSlides.length > 0 && featureTabs.length > 0) {
     let currentSlide = 0;
     let carouselInterval;
 
     const goToSlide = (index) => {
       carouselSlides[currentSlide].classList.remove('active');
-      carouselDots[currentSlide].classList.remove('active');
+      featureTabs[currentSlide].classList.remove('active');
       currentSlide = index;
       carouselSlides[currentSlide].classList.add('active');
-      carouselDots[currentSlide].classList.add('active');
+      featureTabs[currentSlide].classList.add('active');
     };
 
     const nextSlide = () => {
@@ -180,9 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
       startCarousel();
     };
 
-    carouselDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const index = parseInt(dot.getAttribute('data-index'));
+    featureTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const index = parseInt(tab.getAttribute('data-slide'));
         goToSlide(index);
         resetCarousel();
       });
