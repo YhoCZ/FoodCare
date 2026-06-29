@@ -2375,17 +2375,43 @@ body.is-index .site-header.visible {
     --space-4xl: 3.5rem;
   }
 
-  /* Hide nav links on mobile, show toggle */
+  .mobile-only {
+    display: inline !important;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .nav-two-lines {
+    display: inline-block !important;
+    font-size: 0.8rem !important;
+    line-height: 1.1 !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Hide table fruits only on mobile */
+  .table-item {
+    display: none !important;
+  }
+
+  /* Make nav links visible on mobile and inline */
   .site-nav__links {
-    display: none;
+    display: flex !important;
+    gap: 15px !important;
+    align-items: center;
   }
 
   .site-nav__mobile-toggle {
-    display: flex;
+    display: none !important;
   }
 
   .site-nav {
     justify-content: space-between;
+  }
+
+  /* Plus icon hidden on mobile */
+  .site-nav__plus-icon {
+    display: none !important;
   }
 
   /* Splash hero adjustments */
@@ -2393,20 +2419,35 @@ body.is-index .site-header.visible {
     display: none;
   }
 
+  /* Remove bump only on mobile */
+  .splash-hero__nav-container::before {
+    display: none !important;
+  }
+
+  .splash-hero__nav-container {
+    background: #f3f4ee !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 8px 16px !important;
+  }
+
   .splash-hero__nav-container .site-nav {
-    padding: 8px 20px;
+    padding: 8px 15px !important;
+    display: flex !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: auto !important;
   }
 
   .splash-hero__nav-container .site-nav__links {
-    display: none;
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center;
   }
 
   .splash-hero__nav-container .site-nav__mobile-toggle {
-    display: flex;
-  }
-
-  .splash-hero__nav-container .site-nav {
-    justify-content: space-between;
+    display: none !important;
   }
 
   /* Horizontal scroll for mobile grids */
@@ -2520,7 +2561,40 @@ body.is-index .site-header.visible {
 
 @media (max-width: 900px) {
   .feature-showcase-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .feature-phone-wrapper {
+    order: 1;
+  }
+  .feature-tabs-list {
+    order: 2;
+    flex-direction: row !important;
+    overflow-x: auto;
+    width: 100%;
+    gap: 12px;
+    padding: 10px 5px;
+    /* Hide scrollbar but keep functionality */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .feature-tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+  .feature-tab-card {
+    flex: 0 0 220px;
+    padding: 12px !important;
+    border-left: none !important;
+    border-bottom: 5px solid transparent;
+    transform: none !important;
+  }
+  .feature-tab-card:hover {
+    transform: none;
+  }
+  .feature-tab-card.active {
+    border-bottom-color: var(--green-500);
+    transform: scale(1.02) !important;
   }
 }
 
@@ -2573,3 +2647,12 @@ body.is-index .site-header.visible {
   max-width: 380px;
   width: 100%;
 }
+
+/* Global Navigation display states */
+.mobile-only {
+  display: none !important;
+}
+.desktop-only {
+  display: inline !important;
+}
+
