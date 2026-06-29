@@ -298,12 +298,12 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
 
-/* Ensure the floating header items are compact */
-.site-header .site-nav__brand-text { font-size: 1.2rem; }
-.site-header .site-nav__logo-img { width: 24px; height: 24px; }
-.site-header .site-nav__link--cta { padding: 8px 16px; font-size: 0.85rem; }
-.site-header .site-nav__plus-icon { width: 32px; height: 32px; top: auto; left: auto; position: static; transform: none; box-shadow: none; margin: 0; }
-.site-header .site-nav__plus-icon svg { width: 16px; height: 16px; }
+/* Ensure the floating header items are compact and responsive */
+.site-header .site-nav__logo-img { width: clamp(24px, 3vw, 32px); height: auto; }
+.site-header .site-nav__link { font-size: clamp(0.8rem, 1.2vw, 0.92rem); padding: 4px 0; }
+.site-header .site-nav__link--cta { padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px); font-size: clamp(0.75rem, 1vw, 0.85rem); }
+.site-header .site-nav__plus-icon { width: clamp(28px, 3vw, 32px); height: clamp(28px, 3vw, 32px); top: auto; left: auto; position: static; transform: none; box-shadow: none; margin: 0; }
+.site-header .site-nav__plus-icon svg { width: clamp(14px, 1.5vw, 16px); height: clamp(14px, 1.5vw, 16px); }
 
 /* On index.html, the header is hidden until scroll */
 body.is-index .site-header {
@@ -324,7 +324,7 @@ body.is-index .site-header.visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xl);
+  gap: clamp(16px, 3vw, var(--space-xl));
   height: 100%;
   position: relative;
 }
@@ -338,8 +338,8 @@ body.is-index .site-header.visible {
 }
 
 .site-nav__logo-img {
-  width: 32px;
-  height: 32px;
+  width: clamp(32px, 4vw, 40px);
+  height: auto;
   border-radius: var(--radius-sm);
   object-fit: contain;
 }
@@ -359,7 +359,7 @@ body.is-index .site-header.visible {
 }
 
 .site-nav__link {
-  font-size: 0.92rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: 500;
   color: var(--gray-600);
   padding: 6px 0;
@@ -393,10 +393,10 @@ body.is-index .site-header.visible {
 .site-nav__link--cta {
   background: #d4f542;
   color: var(--gray-800) !important;
-  padding: 10px 24px;
+  padding: clamp(8px, 1vw, 10px) clamp(16px, 2vw, 24px);
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
   letter-spacing: 0.01em;
   transition: all var(--transition-base);
 }
@@ -637,7 +637,7 @@ body.is-index .site-header.visible {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr max-content max-content 1fr;
-  gap: 160px; /* Fixed 'X' distance for all gaps (Doubled) */
+  gap: clamp(20px, 8vw, 160px); /* Responsive gap */
   align-items: center;
   position: relative;
 }
@@ -670,29 +670,29 @@ body.is-index .site-header.visible {
   justify-self: start;
 }
 .splash-hero__nav-container .site-nav__link {
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .splash-hero__nav-container .site-nav__link--cta {
-  font-size: 1.3rem;
-  padding: 16px 36px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  padding: clamp(8px, 1.5vw, 16px) clamp(16px, 3vw, 36px);
 }
 .splash-hero__nav-container .site-nav__brand-text {
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 3vw, 2rem);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .splash-hero__nav-container .site-nav__logo-img {
-  width: 48px;
-  height: 48px;
+  width: clamp(32px, 5vw, 48px);
+  height: auto;
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Enormous floating '+' button in the splash nav */
 .splash-hero__nav-container .site-nav__plus-icon {
-  width: 90px;
-  height: 90px;
+  width: clamp(50px, 8vw, 90px);
+  height: clamp(50px, 8vw, 90px);
   position: absolute;
-  top: -45px;
+  top: clamp(-25px, -4vw, -45px);
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
