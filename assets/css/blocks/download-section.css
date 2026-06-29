@@ -1,0 +1,34 @@
+/* Download Section */
+.download-section {
+  padding: var(--space-3xl) 0 var(--space-4xl);
+}
+
+.download-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
+.store-badge.light {
+  background-color: #ffffff;
+  color: #174249;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  padding: 10px 24px;
+}
+
+.store-badge.light:hover {
+  background-color: #f8f9fa;
+}
+
+.store-badge.light .store-badge__label {
+  color: #5c757a;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+

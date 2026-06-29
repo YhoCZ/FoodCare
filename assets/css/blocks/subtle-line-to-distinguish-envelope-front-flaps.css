@@ -1,0 +1,76 @@
+/* Subtle line to distinguish envelope front flaps */
+.envelope-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.02) 50%, rgba(255,255,255,0.05) 50%);
+  clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+}
+
+.envelope-notes {
+  position: absolute;
+  top: 15px;
+  left: 5%;
+  width: 90%;
+  height: 240px;
+  z-index: 2;
+  transition: z-index 0.3s ease;
+}
+
+.envelope-wrapper.open .envelope-notes {
+  z-index: 4; /* Brings the entire stack in front of envelope-front */
+}
+
+.paper-note {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fffdf5;
+  padding: 35px 25px 25px 25px;
+  border-radius: 4px;
+  /* Simulating stacked papers for volume */
+  box-shadow: 
+    0 2px 5px rgba(0,0,0,0.1),
+    -3px 4px 0px #fffdf5,
+    -3px 4px 5px rgba(0,0,0,0.1),
+    -6px 8px 0px #fffdf5,
+    -6px 8px 5px rgba(0,0,0,0.08);
+  border: 1px solid #f0e6d2;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+  transform-origin: bottom center;
+  cursor: pointer;
+  user-select: none;
+  background-image: repeating-linear-gradient(transparent, transparent 27px, #e6decb 28px);
+  background-position: 0 5px;
+}
+
+.paper-note::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+  pointer-events: none;
+}
+
+.paper-note .testimonial-text {
+  font-family: 'Margareth Signature', cursive, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.35;
+  color: #2c2c2c;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.paper-note .testimonial-name {
+  font-family: 'Majestic Valentine', cursive, sans-serif;
+  font-size: 2.2rem;
+  color: var(--green-800);
+  text-align: right;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+

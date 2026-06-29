@@ -1,0 +1,39 @@
+/* Team video placeholder */
+.team-video-section {
+  margin-top: var(--space-2xl);
+}
+
+.team-video-intro {
+  max-width: 700px;
+  margin: 0 auto var(--space-xl);
+  text-align: center;
+}
+
+.team-video-intro h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.team-video-intro p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.team-video-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  aspect-ratio: 16 / 9;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+}
+
+.team-video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+

@@ -1,0 +1,22 @@
+/* Feature tag */
+.feature-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-md);
+}
+
+.feature-tag.tag-new {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.feature-tag.tag-popular {
+  background: var(--amber-50);
+  color: var(--amber-700);
+}
+

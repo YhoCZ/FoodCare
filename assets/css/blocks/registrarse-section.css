@@ -1,0 +1,33 @@
+/* Registrarse Section */
+.register-section {
+  background-color: #f3f4ee; /* Light greenish cream */
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.register-subtitle {
+  color: #3b504e;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xl);
+}
+
+.btn-register {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #27565d;
+  color: #ffffff;
+  padding: 14px 36px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-register:hover {
+  background-color: #1a3c42;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+

@@ -1,0 +1,116 @@
+/* SUBSCRIPTION PLANS */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gap);
+}
+
+.plan-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  border: 2px solid var(--gray-200);
+  transition: all var(--transition-base);
+  text-align: center;
+  position: relative;
+}
+
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.plan-card.plan-featured {
+  border-color: #4CAF50;
+  box-shadow: var(--shadow-green);
+}
+
+.plan-card.plan-featured:hover {
+  box-shadow: 0 15px 45px rgba(76,175,80,0.3);
+}
+
+.plan-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4CAF50;
+  color: var(--white);
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.plan-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+}
+
+.plan-name {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.plan-price {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.plan-price span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.plan-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.plan-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: var(--space-xl);
+}
+
+.plan-features li {
+  padding: 6px 0;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.plan-features li::before {
+  content: '✓';
+  color: #4CAF50;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.plan-features li.disabled {
+  color: var(--gray-400);
+  text-decoration: line-through;
+}
+
+.plan-features li.disabled::before {
+  content: '✗';
+  color: var(--gray-300);
+}
+
+.plan-card .btn {
+  width: 100%;
+  justify-content: center;
+}
+

@@ -1,0 +1,42 @@
+/* Store badges (App Store / Google Play) */
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gray-900);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  min-width: 155px;
+}
+
+.store-badge:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.store-badge__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.store-badge__label {
+  display: block;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.store-badge__store {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+

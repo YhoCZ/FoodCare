@@ -1,0 +1,7 @@
+/* Ensure the floating header items are compact and responsive */
+.site-header .site-nav__logo-img { width: clamp(24px, 3vw, 32px); height: auto; }
+.site-header .site-nav__link { font-size: clamp(0.8rem, 1.2vw, 0.92rem); padding: 4px 0; }
+.site-header .site-nav__link--cta { padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px); font-size: clamp(0.75rem, 1vw, 0.85rem); }
+.site-header .site-nav__plus-icon { width: clamp(28px, 3vw, 32px); height: clamp(28px, 3vw, 32px); top: auto; left: auto; position: static; transform: none; box-shadow: none; margin: 0; }
+.site-header .site-nav__plus-icon svg { width: clamp(14px, 1.5vw, 16px); height: clamp(14px, 1.5vw, 16px); }
+

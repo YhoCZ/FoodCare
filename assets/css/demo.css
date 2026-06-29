@@ -189,13 +189,14 @@ input:checked + .slider:before { transform: translateX(20px); }
 /* BOTTOM NAVIGATION (Protruding FAB) */
 .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: var(--bg-card); box-shadow: 0 -5px 20px rgba(0,0,0,0.05); border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; z-index: 10; display: flex; align-items: center; padding: 0 10px; }
 .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: color 0.2s; padding-bottom: 10px; }
-.nav-item svg { width: 24px; height: 24px; margin-bottom: 4px; }
-.nav-item span { font-size: 0.7rem; font-weight: 500; }
-.nav-item.active { color: var(--green-main); }
+.nav-item svg { width: 24px; height: 24px; padding: 4px 20px; border-radius: 20px; margin-bottom: 4px; transition: all 0.3s ease; box-sizing: content-box; }
+.nav-item span { font-size: 0.7rem; font-weight: 600; }
+.nav-item.active { color: #004A77; }
+.nav-item.active svg { background-color: #004A77; color: #C2E7FF; }
 
 /* Contenedor del Botón Central */
 .nav-fab-container { flex: 1; display: flex; justify-content: center; position: relative; height: 100%; }
-.fab-main { position: absolute; top: -30px; width: 64px; height: 64px; background: var(--green-main); border: 4px solid var(--bg-color); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 15px rgba(76, 175, 80, 0.4); transition: transform 0.2s; }
+.fab-main { position: absolute; top: -30px; width: 64px; height: 64px; background: #00BCD4; border: 4px solid var(--bg-card); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 8px 15px rgba(0, 188, 212, 0.4); transition: transform 0.2s; }
 .fab-main:hover { transform: translateY(-3px); }
 
 /* MODALES */

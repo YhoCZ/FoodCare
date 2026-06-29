@@ -1,0 +1,269 @@
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .splash-hero__content {
+    flex-direction: column;
+    text-align: center;
+    padding-top: var(--space-2xl);
+  }
+
+  .splash-hero__text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .splash-hero__title {
+    justify-content: center;
+  }
+
+  .splash-hero__subtitle {
+    max-width: 100%;
+  }
+
+  .splash-hero__buttons {
+    justify-content: center;
+  }
+
+  .splash-hero__phone-img {
+    width: 280px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .audience-grid,
+  .impact-grid,
+  .plans-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-showcase__phone {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --space-4xl: 3.5rem;
+  }
+
+  .mobile-only {
+    display: inline !important;
+  }
+  .desktop-only {
+    display: none !important;
+  }
+  .nav-two-lines {
+    display: inline-block !important;
+    font-size: 0.8rem !important;
+    line-height: 1.1 !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Hide table fruits only on mobile */
+  .table-item {
+    display: none !important;
+  }
+
+  /* Make nav links visible on mobile and inline */
+  .site-nav__links {
+    display: flex !important;
+    gap: 15px !important;
+    align-items: center;
+  }
+
+  .site-nav__link--cta {
+    padding: 6px 12px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .site-nav__mobile-toggle {
+    display: none !important;
+  }
+
+  .site-nav {
+    justify-content: space-between;
+  }
+
+  /* Plus icon hidden on mobile */
+  .site-nav__plus-icon {
+    display: none !important;
+  }
+
+  /* Splash hero adjustments */
+  .splash-hero__phone {
+    display: none;
+  }
+
+  /* Remove bump only on mobile */
+  .splash-hero__nav-container::before {
+    display: none !important;
+  }
+
+  .splash-hero__nav-container {
+    background: #f3f4ee !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 8px 16px !important;
+  }
+
+  .splash-hero__nav-container .site-nav {
+    padding: 8px 15px !important;
+    display: flex !important;
+    gap: 10px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: auto !important;
+  }
+
+  .splash-hero__nav-container .site-nav__links {
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center;
+  }
+
+  .splash-hero__nav-container .site-nav__mobile-toggle {
+    display: none !important;
+  }
+
+  /* Horizontal scroll for mobile grids */
+  .features-grid,
+  .audience-grid,
+  .impact-grid,
+  .plans-grid,
+  .team-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .features-grid > div,
+  .audience-grid > div,
+  .impact-grid > div,
+  .plans-grid > div,
+  .team-grid > div {
+    flex: 0 0 85% !important;
+    max-width: 85% !important;
+    min-width: 85% !important;
+    scroll-snap-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .marquee-track img {
+    height: 30px;
+    margin-right: 2.5rem;
+  }
+
+  .que-hacemos__card {
+    margin: 0 var(--space-md);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  /* Responsive tweaks for envelope */
+  .envelope-wrapper {
+    max-width: 320px;
+    height: 330px;
+  }
+  
+  .envelope {
+    height: 220px;
+  }
+  
+  .envelope-notes {
+    height: 200px;
+  }
+  
+  .paper-note {
+    padding: 25px 20px 20px 20px;
+  }
+  
+  .paper-note .testimonial-text {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+  
+  .paper-note .testimonial-name {
+    font-size: 1.8rem;
+  }
+  
+  /* Mobile Row Override: Only center shows */
+  .envelope-wrapper.open .paper-note[data-pos="left"],
+  .envelope-wrapper.open .paper-note[data-pos="right"] {
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-hero__title-text {
+    font-size: 3rem;
+  }
+
+  .splash-hero__title-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .splash-hero__buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .store-badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .page-hero__title {
+    font-size: 2.2rem;
+  }
+}
+
